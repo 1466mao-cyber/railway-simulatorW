@@ -246,7 +246,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
 .engAppearanceGrid label{font-size:12px;display:flex;flex-direction:column;gap:5px;min-width:0}
 .engAppearanceGrid select,.engAppearanceGrid input{width:100%;min-width:0;box-sizing:border-box;background:#122334;color:white;border:1px solid #597184;border-radius:8px;min-height:37px;padding:5px}
 .engAppearanceGrid input[type=color]{padding:3px}
-</style></head><body><div id="scene"></div><div id="top"><div><svg class="brandMark" viewBox="0 0 220 54" role="img" aria-label="Railway Simulator W" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="logoG" x1="0" x2="1"><stop stop-color="#f4f7fa"/><stop offset="1" stop-color="#d8e2e8"/></linearGradient><linearGradient id="logoW" x1="0" x2="1"><stop stop-color="#e34e80"/><stop offset="1" stop-color="#a82d60"/></linearGradient></defs><path d="M7 38 C22 14 45 11 70 10 C48 17 30 26 22 40 Z" fill="url(#logoG)"/><path d="M22 44 C41 26 58 22 82 21 C63 27 49 35 43 44 Z" fill="#e34e80"/><text x="81" y="25" font-size="16" font-weight="800" fill="#f4f7fa" font-family="Arial,sans-serif" font-style="italic">RAILWAY</text><text x="81" y="41" font-size="13" font-weight="700" fill="#b7cad4" font-family="Arial,sans-serif" letter-spacing="1">SIMULATOR</text><text x="195" y="41" font-size="31" font-weight="900" fill="url(#logoW)" font-family="Arial,sans-serif" font-style="italic">W</text></svg><small>3D WORLD • Version 3.1.0 • DEMO ROUTE</small></div><div style="text-align:right"><span id="clock">06:00</span><br><small id="counter">駅 0 / 列車 0</small></div></div><div id="panel" hidden><button id="closePanel" type="button" style="float:right;padding:5px 9px" aria-label="設定を閉じる">✕ 閉じる</button><h2 id="modeName">ワールド表示</h2><div id="status">ワールドを生成しています</div><div id="hint">1本指で視点回転、2本指で移動・拡大縮小。</div><div id="options"><label>線路方式</label><select id="trackType"><option value="single">単線</option><option value="double">複線</option></select><label>駅の番線数</label><select id="platforms"><option value="1">1番線</option><option value="2" selected>2番線</option><option value="3">3番線</option><option value="4">4番線</option></select><label>ホーム有効長</label><select id="length"><option value="80">80 m</option><option value="120" selected>120 m</option><option value="160">160 m</option><option value="200">200 m</option><option value="240">240 m</option></select><label>駅名（空欄なら自動）</label><input id="stationName" maxlength="30" placeholder="駅1"><div class="row" style="margin-top:8px"><button id="panelToggle">設定を閉じる</button></div></div><div id="issues"></div><div id="trainPanel" style="margin-top:9px;padding-top:8px;border-top:1px solid #45606a"><b>🚆 列車運行</b><label>運転間隔（ゲーム内分）</label><select id="interval"><option value="5">5分</option><option value="10" selected>10分</option><option value="15">15分</option><option value="30">30分</option></select><label>最高速度</label><select id="maxSpeed"><option value="40">40 km/h</option><option value="70" selected>70 km/h</option><option value="100">100 km/h</option></select><div class="row" style="margin-top:8px"><button id="operate">▶ 運転開始</button><button id="speed">⏩ 10倍速</button></div><div style="margin-top:9px"><b>🚦 色灯式信号・閉塞</b><label style="display:block;margin-top:6px">信号機の形式</label><select id="signalType" style="width:100%;padding:7px;background:#243940;color:white"><option value="3">3灯式（G・Y・R）</option><option value="5">5灯式（G・YG・Y・R）</option></select><div id="signalStatus" style="color:#b7d7dd;margin-top:4px">駅間を1閉塞として管理</div></div><div style="margin-top:9px"><b>🕒 発車ダイヤ設定</b><label style="display:block;margin-top:5px">始発駅の発車時刻（HH:MM、カンマ区切り）</label><textarea id="departures" rows="2" style="width:100%;background:#243940;color:white;border:1px solid #58717a;border-radius:6px;padding:7px;font-size:12px">06:01,06:11,06:21,06:31,06:41,06:51</textarea><div class="row" style="display:flex;gap:5px;margin-top:5px"><button id="applyDiagram">ダイヤ適用</button><button id="autoDiagram">等間隔生成</button></div><div id="diagramStatus" style="color:#b7d7dd;margin-top:4px">発車時刻を編集できます</div></div><div style="margin-top:8px"><b>🛤 進路許可（駅間閉塞）</b><div id="routeControls" style="margin-top:5px"></div></div><div style="margin-top:8px"><b>🔀 駅構内ポイント・番線指定</b><div id="switchControls"></div><div id="switchStatus" style="color:#b7d7dd;margin-top:4px">駅を設置すると表示</div></div><div style="margin-top:8px"><b>🚉 列車交換・運行設定</b><label style="display:block;margin-top:5px">列車種別</label><select id="serviceType" style="width:100%;padding:7px;background:#243940;color:white"><option value="local">普通（全駅停車）</option><option value="express">急行（中間駅を一部通過）</option></select><label style="display:block;margin-top:5px">始発方向</label><select id="dispatchDirection" style="width:100%;padding:7px;background:#243940;color:white"><option value="forward">駅1から</option><option value="reverse">終着駅から</option><option value="alternate">両端交互</option></select><label style="display:block;margin-top:5px">列車の停車時間</label><select id="dwellSeconds" style="width:100%;padding:7px;background:#243940;color:white"><option value="10">10秒</option><option value="20" selected>20秒</option><option value="40">40秒</option><option value="60">60秒</option></select><div id="exchangeStatus" style="color:#b7d7dd;margin-top:5px">番線の使用状況を監視</div><div id="trainList" style="font-size:11px;margin-top:5px"></div></div><div style="margin-top:8px"><b>📋 運行記録</b><div id="timetable">運転開始後に表示します</div></div><div id="alignmentStatus" style="color:#bce7d3;margin-top:6px">🛤 曲線制限：路線生成後に表示</div><div id="trainStatus" style="color:#a5dce5;margin-top:6px">駅を2つ以上設置すると運転できます。</div><small style="color:#b6c5c9">Ver.2.2：分岐器の二条レール・転てつ部品・まくらぎ、曲線カントの簡易3D表現。Ver.2.1：道床・レール・締結装置・まくらぎの形状改良。街並み・建物外壁・屋根・道路・緑地の質感改善、曲線半径に応じた速度制限・曲線制限標識・線形情報、駅別ダイヤ連動・運行遅延表示・終着処理・番線指定、左側通行、3灯式・5灯式色灯信号、前方閉塞予告。運転指令画面・出発抑止・番線変更・出庫時刻調整。駅間1閉塞の簡易制御。3線以上の駅で簡易急行待避、番線・単線競合検査。実物の連動装置とは異なります。</small></div></div><div id="toolbar"><button id="view" class="active">👁 視点</button><button id="station">🚉 駅設置</button><button id="remove">✕ 駅撤去</button><button id="settings">⚙ 設定</button><button id="trainButton">🚆 運行</button><button id="diagramButton">📈 ダイヤ</button><button id="controlButton">🎛 指令</button><button id="economyButton">💴 経営</button><button id="engineeringButton" class="ui-extra">🛠 車両設計</button><button id="reset">🌏 新規生成</button><button id="save">💾 保存</button><label class="filebtn" for="load">📂 読込</label><input id="load" type="file" accept=".json,application/json"></div><div id="diagramOverlay" hidden><div id="diagramHeader"><b>📈 ダイヤグラム編集</b><button id="diagramAdd">＋ 列車</button><button id="diagramDelete">削除</button><button id="checkRoutes">⚠ 競合検査</button><button id="autoToggle">⚙ 自動生成</button><button id="diagramClose">✕ 閉じる</button></div><div id="autoForm" hidden><label>開始<input id="autoFrom" type="time" value="06:00"></label><label>終了<input id="autoTo" type="time" value="09:00"></label><label>普通間隔（分）<input id="autoLocal" type="number" min="2" max="120" value="10"></label><label>急行間隔（分・0は無し）<input id="autoExpress" type="number" min="0" max="120" value="30"></label><label>方向<select id="autoDirection"><option value="both">上下両方向</option><option value="1">下りのみ</option><option value="-1">上りのみ</option></select></label><button id="autoGenerate">自動生成を実行</button></div><div id="diagramForm"><label>列車名<input id="diaName" maxlength="18" value="101"></label><label>種別<select id="diaType"><option value="local">普通</option><option value="express">急行</option></select></label><label>方向<select id="diaDirection"><option value="1">下り（駅1→終点）</option><option value="-1">上り（終点→駅1）</option></select></label><label>始発時刻<input id="diaStart" type="time" step="30" value="06:10"></label><label>駅間走行時間（秒）<input id="diaRun" type="number" min="30" max="3600" step="30" value="180"></label><label>停車時間（秒）<input id="diaDwell" type="number" min="0" max="600" step="30" value="30"></label><button id="diagramApply">変更を反映</button></div><div id="stationEdit"><b>駅別設定</b><select id="diaStation"></select><label>駅間秒 <input id="diaSegmentRun" type="number" min="30" max="3600" step="10"></label><label>停車秒 <input id="diaStationDwell" type="number" min="0" max="600" step="10"></label><label>番線 <select id="diaPlatform"></select></label><button id="diaStationApply">駅別反映</button></div><div id="diagramScroll"><svg id="diagramSvg" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="時刻と駅を軸にした列車ダイヤグラム"></svg></div><div id="interlockingReport" style="display:none;max-height:105px;overflow:auto;background:#2c2428;color:#ffe0d6;padding:8px;border-radius:7px;font-size:11px;white-space:pre-wrap"></div><div id="diagramFoot">駅を2つ以上設置して列車を追加。スジをタップすると編集できるで。運転開始前にダイヤを作成してな。</div></div><div id="controlOverlay" hidden><div class="controlHead"><b>🎛 運転指令所 — 運行管理</b><button id="controlRefresh">↻ 更新</button><button id="controlClose">✕ 閉じる</button></div><div id="controlSummary"></div><div id="controlTrains"></div><div id="controlSchedule"></div><small>指令操作は簡易シミュレーションです。進路・閉塞の安全制約を優先します。</small></div><div id="economyOverlay" hidden><div class="controlHead"><b>💴 鉄道会社経営</b><button id="economyClose">✕ 閉じる</button></div><p style="color:#b5cbd1">列車を運行して運賃収入を得よう。建設・車両購入・沿線開発には資金が必要やで。</p><div id="econSummary" class="econGrid"></div><h3>🎫 運賃・サービス政策</h3><div class="econCard"><label>初乗り運賃 <input id="baseFare" type="range" min="120" max="400" step="10" value="180" style="width:100%"></label><strong id="fareDisplay">180円</strong><small>高運賃ほど客離れが起きやすくなります</small><label style="display:block;margin-top:10px">運行方針 <select id="servicePolicy" style="padding:7px;background:#243940;color:white;border-radius:7px"><option value="balanced">標準運行</option><option value="comfort">快適性重視（費用増・評判改善）</option><option value="economy">経費節約（費用減・評判低下）</option></select></label><div id="serviceForecast" style="margin-top:8px;color:#b6d1d8"></div></div><h3>🏦 財務・借入</h3><div class="econActions"><button id="borrowMoney">借入 ＋2,000万円</button><button id="repayMoney">返済 −500万円</button></div><div id="financeReport" class="econCard"></div><h3>🚆 車両・設備投資</h3><div class="econActions"><button id="buyTrain">🚃 2両編成購入（800万円）</button><button id="buyDepot">🏭 車両基地整備（1500万円）</button></div><h3>🏘 沿線開発</h3><label>開発する駅 <select id="econStation" style="padding:7px;background:#243940;color:white;border-radius:7px"></select></label><div class="econActions"><button id="buildHousing">🏠 住宅開発（500万円）</button><button id="buildCommerce">🏬 商業開発（800万円）</button></div><h3>🚉 駅別需要・開発状況</h3><div style="overflow-x:auto"><table class="econTable"><thead><tr><th>駅</th><th>周辺人口</th><th>住宅</th><th>商業</th><th>乗降実績</th></tr></thead><tbody id="econStations"></tbody></table></div><h3>📊 月次経営実績</h3><div id="monthlyReport" style="overflow-x:auto"></div><h3>🚉 時間帯別・駅間旅客流動</h3><div id="odReport" style="overflow-x:auto"></div><h3>🚃 車両運用・列車別乗車率</h3><div id="fleetReport" style="overflow-x:auto"></div><h3>📋 経営記録</h3><div id="econLog"></div><small>試作経済モデル：需要・運賃・費用はゲーム用の仮定値。車両基地は保有枠の拡張として扱い、3D建物の設置は今後対応。</small></div><div id="engineeringOverlay" hidden><div class="engHeader"><h2>🚃 車両設計・工学評価</h2><button type="button" id="engClose">✕ 閉じる</button></div><p class="engLead">実車の設計検討を意識した一次評価。入力値から牽引・粘着・質量・ブレーキ・勾配・編成長を概算します。認証・製造に利用できる検証済み解析ではありません。</p><div class="engGrid"><section class="engCard"><h3>設計書</h3><select id="engDesigns" aria-label="保存した設計書"></select><div class="engActions"><button id="engNew">＋ 新規</button><button id="engSave">保存</button><button id="engDuplicate">複製</button><button id="engDelete">削除</button></div><div class="engQuick"><label>車両の用途<select id="engPreset"><option value="commuter">通勤型</option><option value="suburban">近郊型</option><option value="express">特急型</option><option value="metro">地下鉄型</option></select></label><label>編成両数<select id="engQuickCars"><option>2</option><option selected>4</option><option>6</option><option>8</option><option>10</option><option>12</option></select></label><button type="button" id="engAuto">⚙ 合理的な仕様を自動設定</button></div><div class="engActions"><button type="button" id="engAdvanced">詳細設定を表示</button><span id="engAutoInfo">主要項目だけ選んで自動設計できます</span></div><div class="engPreview"><div class="engPreviewHead"><strong>🚃 車両プレビュー</strong><span>編成・車体寸法・電動車配置を反映</span></div><div class="engPreviewTabs"><button type="button" id="engPreviewSide" class="active">側面</button><button type="button" id="engPreviewFront">正面</button><button type="button" id="engPreview3D">3D精密</button></div><div id="engPreviewCanvas" role="img" aria-label="設計中の車両の概略図"></div><div id="eng3DCanvas" hidden></div><div id="engPreviewCaption"></div><small>概略モデルです。実車の車体構造・機器配置・車両限界の確認図ではありません。</small></div><div class="engAppearance"><h3>🎨 車両外観デザイン</h3><div class="engAppearanceGrid">
+</style></head><body><div id="scene"></div><div id="top"><div><svg class="brandMark" viewBox="0 0 220 54" role="img" aria-label="Railway Simulator W" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="logoG" x1="0" x2="1"><stop stop-color="#f4f7fa"/><stop offset="1" stop-color="#d8e2e8"/></linearGradient><linearGradient id="logoW" x1="0" x2="1"><stop stop-color="#e34e80"/><stop offset="1" stop-color="#a82d60"/></linearGradient></defs><path d="M7 38 C22 14 45 11 70 10 C48 17 30 26 22 40 Z" fill="url(#logoG)"/><path d="M22 44 C41 26 58 22 82 21 C63 27 49 35 43 44 Z" fill="#e34e80"/><text x="81" y="25" font-size="16" font-weight="800" fill="#f4f7fa" font-family="Arial,sans-serif" font-style="italic">RAILWAY</text><text x="81" y="41" font-size="13" font-weight="700" fill="#b7cad4" font-family="Arial,sans-serif" letter-spacing="1">SIMULATOR</text><text x="195" y="41" font-size="31" font-weight="900" fill="url(#logoW)" font-family="Arial,sans-serif" font-style="italic">W</text></svg><small>3D WORLD • Version 3.2.0 • DEMO ROUTE</small></div><div style="text-align:right"><span id="clock">06:00</span><br><small id="counter">駅 0 / 列車 0</small></div></div><div id="panel" hidden><button id="closePanel" type="button" style="float:right;padding:5px 9px" aria-label="設定を閉じる">✕ 閉じる</button><h2 id="modeName">ワールド表示</h2><div id="status">ワールドを生成しています</div><div id="hint">1本指で視点回転、2本指で移動・拡大縮小。</div><div id="options"><label>線路方式</label><select id="trackType"><option value="single">単線</option><option value="double">複線</option></select><label>駅の番線数</label><select id="platforms"><option value="1">1番線</option><option value="2" selected>2番線</option><option value="3">3番線</option><option value="4">4番線</option></select><label>ホーム有効長</label><select id="length"><option value="80">80 m</option><option value="120" selected>120 m</option><option value="160">160 m</option><option value="200">200 m</option><option value="240">240 m</option></select><label>駅名（空欄なら自動）</label><input id="stationName" maxlength="30" placeholder="駅1"><div class="row" style="margin-top:8px"><button id="panelToggle">設定を閉じる</button></div></div><div id="issues"></div><div id="trainPanel" style="margin-top:9px;padding-top:8px;border-top:1px solid #45606a"><b>🚆 列車運行</b><label>運転間隔（ゲーム内分）</label><select id="interval"><option value="5">5分</option><option value="10" selected>10分</option><option value="15">15分</option><option value="30">30分</option></select><label>最高速度</label><select id="maxSpeed"><option value="40">40 km/h</option><option value="70" selected>70 km/h</option><option value="100">100 km/h</option></select><div class="row" style="margin-top:8px"><button id="operate">▶ 運転開始</button><button id="speed">⏩ 10倍速</button></div><div style="margin-top:9px"><b>🚦 色灯式信号・閉塞</b><label style="display:block;margin-top:6px">信号機の形式</label><select id="signalType" style="width:100%;padding:7px;background:#243940;color:white"><option value="3">3灯式（G・Y・R）</option><option value="5">5灯式（G・YG・Y・R）</option></select><div id="signalStatus" style="color:#b7d7dd;margin-top:4px">駅間を1閉塞として管理</div></div><div style="margin-top:9px"><b>🕒 発車ダイヤ設定</b><label style="display:block;margin-top:5px">始発駅の発車時刻（HH:MM、カンマ区切り）</label><textarea id="departures" rows="2" style="width:100%;background:#243940;color:white;border:1px solid #58717a;border-radius:6px;padding:7px;font-size:12px">06:01,06:11,06:21,06:31,06:41,06:51</textarea><div class="row" style="display:flex;gap:5px;margin-top:5px"><button id="applyDiagram">ダイヤ適用</button><button id="autoDiagram">等間隔生成</button></div><div id="diagramStatus" style="color:#b7d7dd;margin-top:4px">発車時刻を編集できます</div></div><div style="margin-top:8px"><b>🛤 進路許可（駅間閉塞）</b><div id="routeControls" style="margin-top:5px"></div></div><div style="margin-top:8px"><b>🔀 駅構内ポイント・番線指定</b><div id="switchControls"></div><div id="switchStatus" style="color:#b7d7dd;margin-top:4px">駅を設置すると表示</div></div><div style="margin-top:8px"><b>🚉 列車交換・運行設定</b><label style="display:block;margin-top:5px">列車種別</label><select id="serviceType" style="width:100%;padding:7px;background:#243940;color:white"><option value="local">普通（全駅停車）</option><option value="express">急行（中間駅を一部通過）</option></select><label style="display:block;margin-top:5px">始発方向</label><select id="dispatchDirection" style="width:100%;padding:7px;background:#243940;color:white"><option value="forward">駅1から</option><option value="reverse">終着駅から</option><option value="alternate">両端交互</option></select><label style="display:block;margin-top:5px">列車の停車時間</label><select id="dwellSeconds" style="width:100%;padding:7px;background:#243940;color:white"><option value="10">10秒</option><option value="20" selected>20秒</option><option value="40">40秒</option><option value="60">60秒</option></select><div id="exchangeStatus" style="color:#b7d7dd;margin-top:5px">番線の使用状況を監視</div><div id="trainList" style="font-size:11px;margin-top:5px"></div></div><div style="margin-top:8px"><b>📋 運行記録</b><div id="timetable">運転開始後に表示します</div></div><div id="alignmentStatus" style="color:#bce7d3;margin-top:6px">🛤 曲線制限：路線生成後に表示</div><div id="trainStatus" style="color:#a5dce5;margin-top:6px">駅を2つ以上設置すると運転できます。</div><small style="color:#b6c5c9">Ver.2.2：分岐器の二条レール・転てつ部品・まくらぎ、曲線カントの簡易3D表現。Ver.2.1：道床・レール・締結装置・まくらぎの形状改良。街並み・建物外壁・屋根・道路・緑地の質感改善、曲線半径に応じた速度制限・曲線制限標識・線形情報、駅別ダイヤ連動・運行遅延表示・終着処理・番線指定、左側通行、3灯式・5灯式色灯信号、前方閉塞予告。運転指令画面・出発抑止・番線変更・出庫時刻調整。駅間1閉塞の簡易制御。3線以上の駅で簡易急行待避、番線・単線競合検査。実物の連動装置とは異なります。</small></div></div><div id="toolbar"><button id="view" class="active">👁 視点</button><button id="station">🚉 駅設置</button><button id="remove">✕ 駅撤去</button><button id="settings">⚙ 設定</button><button id="trainButton">🚆 運行</button><button id="diagramButton">📈 ダイヤ</button><button id="controlButton">🎛 指令</button><button id="economyButton">💴 経営</button><button id="engineeringButton" class="ui-extra">🛠 車両設計</button><button id="reset">🌏 新規生成</button><button id="save">💾 保存</button><label class="filebtn" for="load">📂 読込</label><input id="load" type="file" accept=".json,application/json"></div><div id="diagramOverlay" hidden><div id="diagramHeader"><b>📈 ダイヤグラム編集</b><button id="diagramAdd">＋ 列車</button><button id="diagramDelete">削除</button><button id="checkRoutes">⚠ 競合検査</button><button id="autoToggle">⚙ 自動生成</button><button id="diagramClose">✕ 閉じる</button></div><div id="autoForm" hidden><label>開始<input id="autoFrom" type="time" value="06:00"></label><label>終了<input id="autoTo" type="time" value="09:00"></label><label>普通間隔（分）<input id="autoLocal" type="number" min="2" max="120" value="10"></label><label>急行間隔（分・0は無し）<input id="autoExpress" type="number" min="0" max="120" value="30"></label><label>方向<select id="autoDirection"><option value="both">上下両方向</option><option value="1">下りのみ</option><option value="-1">上りのみ</option></select></label><button id="autoGenerate">自動生成を実行</button></div><div id="diagramForm"><label>列車名<input id="diaName" maxlength="18" value="101"></label><label>種別<select id="diaType"><option value="local">普通</option><option value="express">急行</option></select></label><label>方向<select id="diaDirection"><option value="1">下り（駅1→終点）</option><option value="-1">上り（終点→駅1）</option></select></label><label>始発時刻<input id="diaStart" type="time" step="30" value="06:10"></label><label>駅間走行時間（秒）<input id="diaRun" type="number" min="30" max="3600" step="30" value="180"></label><label>停車時間（秒）<input id="diaDwell" type="number" min="0" max="600" step="30" value="30"></label><button id="diagramApply">変更を反映</button></div><div id="stationEdit"><b>駅別設定</b><select id="diaStation"></select><label>駅間秒 <input id="diaSegmentRun" type="number" min="30" max="3600" step="10"></label><label>停車秒 <input id="diaStationDwell" type="number" min="0" max="600" step="10"></label><label>番線 <select id="diaPlatform"></select></label><button id="diaStationApply">駅別反映</button></div><div id="diagramScroll"><svg id="diagramSvg" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="時刻と駅を軸にした列車ダイヤグラム"></svg></div><div id="interlockingReport" style="display:none;max-height:105px;overflow:auto;background:#2c2428;color:#ffe0d6;padding:8px;border-radius:7px;font-size:11px;white-space:pre-wrap"></div><div id="diagramFoot">駅を2つ以上設置して列車を追加。スジをタップすると編集できるで。運転開始前にダイヤを作成してな。</div></div><div id="controlOverlay" hidden><div class="controlHead"><b>🎛 運転指令所 — 運行管理</b><button id="controlRefresh">↻ 更新</button><button id="controlClose">✕ 閉じる</button></div><div id="controlSummary"></div><div id="controlTrains"></div><div id="controlSchedule"></div><small>指令操作は簡易シミュレーションです。進路・閉塞の安全制約を優先します。</small></div><div id="economyOverlay" hidden><div class="controlHead"><b>💴 鉄道会社経営</b><button id="economyClose">✕ 閉じる</button></div><p style="color:#b5cbd1">列車を運行して運賃収入を得よう。建設・車両購入・沿線開発には資金が必要やで。</p><div id="econSummary" class="econGrid"></div><h3>🎫 運賃・サービス政策</h3><div class="econCard"><label>初乗り運賃 <input id="baseFare" type="range" min="120" max="400" step="10" value="180" style="width:100%"></label><strong id="fareDisplay">180円</strong><small>高運賃ほど客離れが起きやすくなります</small><label style="display:block;margin-top:10px">運行方針 <select id="servicePolicy" style="padding:7px;background:#243940;color:white;border-radius:7px"><option value="balanced">標準運行</option><option value="comfort">快適性重視（費用増・評判改善）</option><option value="economy">経費節約（費用減・評判低下）</option></select></label><div id="serviceForecast" style="margin-top:8px;color:#b6d1d8"></div></div><h3>🏦 財務・借入</h3><div class="econActions"><button id="borrowMoney">借入 ＋2,000万円</button><button id="repayMoney">返済 −500万円</button></div><div id="financeReport" class="econCard"></div><h3>🚆 車両・設備投資</h3><div class="econActions"><button id="buyTrain">🚃 2両編成購入（800万円）</button><button id="buyDepot">🏭 車両基地整備（1500万円）</button></div><h3>🏘 沿線開発</h3><label>開発する駅 <select id="econStation" style="padding:7px;background:#243940;color:white;border-radius:7px"></select></label><div class="econActions"><button id="buildHousing">🏠 住宅開発（500万円）</button><button id="buildCommerce">🏬 商業開発（800万円）</button></div><h3>🚉 駅別需要・開発状況</h3><div style="overflow-x:auto"><table class="econTable"><thead><tr><th>駅</th><th>周辺人口</th><th>住宅</th><th>商業</th><th>乗降実績</th></tr></thead><tbody id="econStations"></tbody></table></div><h3>📊 月次経営実績</h3><div id="monthlyReport" style="overflow-x:auto"></div><h3>🚉 時間帯別・駅間旅客流動</h3><div id="odReport" style="overflow-x:auto"></div><h3>🚃 車両運用・列車別乗車率</h3><div id="fleetReport" style="overflow-x:auto"></div><h3>📋 経営記録</h3><div id="econLog"></div><small>試作経済モデル：需要・運賃・費用はゲーム用の仮定値。車両基地は保有枠の拡張として扱い、3D建物の設置は今後対応。</small></div><div id="engineeringOverlay" hidden><div class="engHeader"><h2>🚃 車両設計・工学評価</h2><button type="button" id="engClose">✕ 閉じる</button></div><p class="engLead">実車の設計検討を意識した一次評価。入力値から牽引・粘着・質量・ブレーキ・勾配・編成長を概算します。認証・製造に利用できる検証済み解析ではありません。</p><div class="engGrid"><section class="engCard"><h3>設計書</h3><select id="engDesigns" aria-label="保存した設計書"></select><div class="engActions"><button id="engNew">＋ 新規</button><button id="engSave">保存</button><button id="engDuplicate">複製</button><button id="engDelete">削除</button></div><div class="engQuick"><label>車両の用途<select id="engPreset"><option value="commuter">通勤型</option><option value="suburban">近郊型</option><option value="express">特急型</option><option value="metro">地下鉄型</option></select></label><label>編成両数<select id="engQuickCars"><option>2</option><option selected>4</option><option>6</option><option>8</option><option>10</option><option>12</option></select></label><button type="button" id="engAuto">⚙ 合理的な仕様を自動設定</button></div><div class="engActions"><button type="button" id="engAdvanced">詳細設定を表示</button><span id="engAutoInfo">主要項目だけ選んで自動設計できます</span></div><div class="engPreview"><div class="engPreviewHead"><strong>🚃 車両プレビュー</strong><span>編成・車体寸法・電動車配置を反映</span></div><div class="engPreviewTabs"><button type="button" id="engPreviewSide" class="active">側面</button><button type="button" id="engPreviewFront">正面</button><button type="button" id="engPreview3D">3D精密</button><button type="button" id="engPreviewDetail" title="ディテール表示を切替">精密表示 ON</button></div><div id="engPreviewCanvas" role="img" aria-label="設計中の車両の概略図"></div><div id="eng3DCanvas" hidden></div><div id="engPreviewCaption"></div><small>精密表示は台車・床下機器・前面・屋根上機器を描き分けます。機器配置は汎用的な模式モデルであり、実車の設計図ではありません。</small></div><div class="engAppearance"><h3>🎨 車両外観デザイン</h3><div class="engAppearanceGrid">
 <label>車体カラー<input id="engBodyColor" type="color" value="#d8e0e8"></label>
 <label>帯カラー<input id="engStripeColor" type="color" value="#ba477b"></label>
 <label>前面形状<select id="engFrontShape"><option value="flat">平妻型</option><option value="slant">傾斜型</option><option value="rounded">丸みのある前面</option></select></label>
@@ -1249,13 +1249,14 @@ $('engImport').addEventListener('change',async e=>{const f=e.target.files[0];if(
 import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 const root=document.getElementById('eng3DCanvas');
+let detailEnabled=true;document.getElementById('engPreviewDetail').addEventListener('click',e=>{detailEnabled=!detailEnabled;e.currentTarget.textContent='精密表示 '+(detailEnabled?'ON':'OFF');if(last)build(last)});
 const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true,powerPreference:'low-power'});
 renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.75));renderer.outputColorSpace=THREE.SRGBColorSpace;
 renderer.shadowMap.enabled=false;root.appendChild(renderer.domElement);
 const scene=new THREE.Scene();scene.background=new THREE.Color('#142638');
 scene.fog=new THREE.Fog('#142638',35,100);
 const camera=new THREE.PerspectiveCamera(38,1,.05,200);camera.position.set(15,10,18);
-const controls=new OrbitControls(camera,renderer.domElement);controls.enableDamping=true;controls.dampingFactor=.08;controls.minDistance=4;controls.maxDistance=70;controls.maxPolarAngle=Math.PI*.86;
+const controls=new OrbitControls(camera,renderer.domElement);controls.enableDamping=true;controls.dampingFactor=.08;controls.minDistance=4;controls.maxDistance=170;controls.maxPolarAngle=Math.PI*.86;
 scene.add(new THREE.HemisphereLight(0xc9e8ff,0x354253,2.2));
 const light=new THREE.DirectionalLight(0xffffff,2.7);light.position.set(5,14,8);scene.add(light);
 const fill=new THREE.DirectionalLight(0x93b9e8,1.2);fill.position.set(-12,5,-9);scene.add(fill);
@@ -1263,11 +1264,18 @@ let model=new THREE.Group();scene.add(model);
 const mat=(c,metal=.1,rough=.55)=>new THREE.MeshStandardMaterial({color:c,metalness:metal,roughness:rough});
 const body=mat('#d8e0e8',.58,.3), stripe=mat('#ba477b',.32,.38),glass=mat('#23455e',.35,.18),rubber=mat('#1c2832',.15,.8),silver=mat('#a3b3c0',.65,.35),dark=mat('#303d49',.25,.6),white=mat('#fff5c9',.1,.3),red=mat('#b32c35',.1,.3);
 const cube=new THREE.BoxGeometry(1,1,1), cyl=new THREE.CylinderGeometry(1,1,1,12);
+const wheelGeo=new THREE.CylinderGeometry(.37,.37,.16,20),hubGeo=new THREE.CylinderGeometry(.17,.17,.17,20);
+const brass=mat('#b6a68b',.62,.42),safety=mat('#d0b358',.24,.55),black=mat('#0d1923',.2,.7),seat=mat('#3b7893',.1,.75),floorMat=mat('#6e7b84',.15,.8);
+function line(parent,m,points,r=.015){for(let j=1;j<points.length;j++)rod(parent,m,points[j-1],points[j],r)}
+function cylAt(parent,m,x,y,z,rad,h,axis='y'){const o=new THREE.Mesh(cyl,m);o.position.set(x,y,z);o.scale.set(rad,h,rad);if(axis==='x')o.rotation.z=Math.PI/2;if(axis==='z')o.rotation.x=Math.PI/2;parent.add(o);return o}
+function detailBox(parent,m,x,y,z,w,h,d){if(detailEnabled)box(parent,m,x,y,z,w,h,d)}
+function detailRod(parent,m,a,b,r){if(detailEnabled)rod(parent,m,a,b,r)}
+
 function box(parent,m,x,y,z,w,h,d){const mesh=new THREE.Mesh(cube,m);mesh.position.set(x,y,z);mesh.scale.set(w,h,d);parent.add(mesh);return mesh}
 function rod(parent,m,a,b,r){const delta=new THREE.Vector3().subVectors(new THREE.Vector3(...b),new THREE.Vector3(...a));const mesh=new THREE.Mesh(cyl,m);mesh.position.copy(new THREE.Vector3(...a).add(new THREE.Vector3(...b)).multiplyScalar(.5));mesh.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),delta.clone().normalize());mesh.scale.set(r,delta.length(),r);parent.add(mesh)}
-function wheel(parent,x,y,z){const t=new THREE.Mesh(new THREE.CylinderGeometry(.37,.37,.16,18),dark);t.rotation.x=Math.PI/2;t.position.set(x,y,z);parent.add(t);const disc=new THREE.Mesh(new THREE.CylinderGeometry(.17,.17,.17,18),silver);disc.rotation.x=Math.PI/2;disc.position.set(x,y,z+(z>0?.01:-.01));parent.add(disc)}
+function wheel(parent,x,y,z){const t=new THREE.Mesh(wheelGeo,dark);t.rotation.x=Math.PI/2;t.position.set(x,y,z);parent.add(t);const disc=new THREE.Mesh(hubGeo,silver);disc.rotation.x=Math.PI/2;disc.position.set(x,y,z+(z>0?.01:-.01));parent.add(disc)}
 function build(d){
- scene.remove(model);model.traverse(o=>{if(o.geometry&&o.geometry!==cube&&o.geometry!==cyl)o.geometry.dispose()});model=new THREE.Group();scene.add(model);
+ scene.remove(model);model.traverse(o=>{if(o.geometry&&o.geometry!==cube&&o.geometry!==cyl&&o.geometry!==wheelGeo&&o.geometry!==hubGeo)o.geometry.dispose()});model=new THREE.Group();scene.add(model);
  body.color.set(d.bodyColor||'#d8e0e8');stripe.color.set(d.stripeColor||'#ba477b');body.metalness=d.bodyMaterial==='painted'?.15:.65;body.roughness=d.bodyMaterial==='painted'?.35:.25;
  const n=Math.max(1,Math.min(12,Math.round(+d.cars||4))),width=Math.max(2,Math.min(3.5,+d.width||2.8)),len=Math.max(10,Math.min(26,+d.carLength||20));
  const scale=.45,L=len*scale,W=width*scale,H=1.25,spacing=.12,total=n*(L+spacing)-spacing;
@@ -1276,6 +1284,18 @@ function build(d){
   const car=new THREE.Group();car.position.x=-total/2+L/2+i*(L+spacing);model.add(car);
   const cab=i===0||i===n-1;
   box(car,body,0,1.65,0,L-.04,H,W);
+  // Side skirt, window surrounds, roof shoulder and seams
+  for(const side of [-1,1]){
+   const z=side*(W/2+.025);
+   detailBox(car,silver,0,2.19,z,L-.12,.026,.025);
+   detailBox(car,dark,0,1.01,z,L-.13,.028,.027);
+   for(const x of [-L*.49,L*.49])detailBox(car,dark,x,1.63,z,.015,1.19,.026);
+   for(let x=-L*.43;x<L*.44;x+=L*.14)detailBox(car,silver,x,1.04,z,.012,.16,.024);
+  }
+  // Roof transverse ribs and drip rail
+  for(let k=0;k<9;k++)detailBox(car,silver,-L*.44+k*L*.11,2.365,0,.024,.025,W*.91);
+  for(const side of [-1,1])detailBox(car,silver,0,2.29,side*W*.47,L-.12,.026,.03);
+
   box(car,stripe,0,1.35,W/2+.006,L-.07,.09,.018);box(car,stripe,0,1.35,-W/2-.006,L-.07,.09,.018);
   box(car,silver,0,2.33,0,L-.24,.09,W-.14);
   box(car,dark,0,2.4,0,L*.72,.05,W*.72);
@@ -1285,6 +1305,11 @@ function build(d){
    const doors=Math.max(2,Math.min(4,+d.doorCount||3));for(let di=0;di<doors;di++){const t=(di-(doors-1)/2)*(.72/Math.max(1,doors-1));
     const x=t*L;
     box(car,silver,x,1.48,z,.65,.92,.023);
+    detailBox(car,dark,x,1.97,z+side*.023,.69,.026,.018);
+    detailBox(car,dark,x,1.01,z+side*.023,.69,.02,.018);
+    detailBox(car,brass,x+.28,1.36,z+side*.032,.018,.12,.018);
+    detailBox(car,black,x,1.75,z+side*.04,.014,.29,.018);
+
     box(car,glass,x,1.75,z+side*.016,.54,.29,.027);
     box(car,dark,x,1.48,z+side*.027,.012,.87,.013);
     box(car,rubber,x+.31,1.48,z+side*.025,.018,.9,.015);
@@ -1293,6 +1318,10 @@ function build(d){
     const x=t*L;if(Math.abs(x)>L/2-.28)continue;
     box(car,glass,x,1.89,z,.42,.37,.029);
     box(car,silver,x,1.69,z+side*.01,.45,.018,.032);
+    detailBox(car,dark,x,2.08,z+side*.012,.45,.015,.026);
+    detailBox(car,dark,x-.23,1.89,z+side*.015,.013,.39,.027);
+    detailBox(car,dark,x+.23,1.89,z+side*.015,.013,.39,.027);
+
    }
    box(car,dark,0,.92,side*(W/2+.015),L*.82,.09,.055);
   }
@@ -1301,9 +1330,22 @@ function build(d){
    const bx=b*(L*.32);
    box(car,dark,bx,.65,0,1.18,.22,W*.82);
    box(car,silver,bx,.8,0,.78,.13,W*.58);
+   detailBox(car,dark,bx,.53,0,.87,.09,W*.72);
+   detailBox(car,silver,bx,.94,0,.48,.07,W*.48);
+   for(const side of [-1,1]){
+    const z=side*W*.38;
+    detailBox(car,silver,bx-.35,.65,z,.08,.18,.11);
+    detailBox(car,silver,bx+.35,.65,z,.08,.18,.11);
+    detailBox(car,brass,bx,.76,z,.11,.13,.12);
+    for(let k=0;k<4;k++)detailBox(car,black,bx-.12+k*.08,.57,z,.028,.055,.12);
+   }
+
    for(const axle of [-.37,.37]){
     for(const side of [-1,1])wheel(car,bx+axle,.43,side*(W*.43));
     rod(car,silver,[bx+axle,.43,-W*.43],[bx+axle,.43,W*.43],.045);
+    detailBox(car,dark,bx+axle,.46,0,.13,.12,W*.7);
+    for(const side of [-1,1])detailBox(car,brass,bx+axle,.58,side*W*.31,.18,.12,.16);
+
    }
    for(const side of [-1,1]){
     box(car,rubber,bx,.65,side*W*.35,.25,.25,.12);
@@ -1311,7 +1353,22 @@ function build(d){
    }
   }
   // underfloor equipment: traction inverter / auxiliary converter / air reservoir
-  for(let j=0;j<3;j++)box(car,j===1?silver:dark,(j-1)*L*.17,.97,0,L*.12,.24,W*.55);
+  for(let j=0;j<3;j++){
+   const x=(j-1)*L*.17;
+   box(car,j===1?silver:dark,x,.97,0,L*.12,.24,W*.55);
+   for(const side of [-1,1]){
+    detailBox(car,silver,x,.97,side*W*.282,L*.11,.012,.012);
+    for(let k=0;k<6;k++)detailBox(car,dark,x+(k-2.5)*L*.014,.97,side*W*.293,.014,.16,.01);
+   }
+  }
+  // Brake piping, compressor cylinder, auxiliary air reservoir
+  if(detailEnabled){
+   cylAt(car,silver,L*.26,.96,-W*.16,.11,.6,'x');
+   cylAt(car,dark,L*.26,.96,W*.16,.1,.52,'x');
+   line(car,brass,[[-L*.32,.91,W*.25],[-L*.1,.91,W*.25],[L*.22,.88,W*.25]],.018);
+   for(const side of [-1,1])detailBox(car,dark,0,.87,side*W*.34,L*.28,.04,.03);
+  }
+
   if(i<d.motorCars && d.panto!=='none'){
    box(car,dark,-L*.1,.93,0,L*.18,.22,W*.65);
    // single-arm pantograph, contact strip and base
@@ -1321,11 +1378,17 @@ function build(d){
    rod(car,silver,[px+.1,2.95,0],[px+.32,3.16,.12],.022);
    rod(car,silver,[px-.34,2.51,.2],[px+.1,2.95,0],.018);
    box(car,dark,px+.31,3.18,.12,.75,.045,.07);
+   detailRod(car,brass,[px-.34,2.51,-.22],[px-.2,2.51,-.22],.026);
+   for(const z of [-.2,.2])detailBox(car,silver,px,2.5,z,.16,.08,.08);
+   detailBox(car,black,px+.31,3.21,.12,.72,.018,.06);
+
   }
   // air conditioners and ventilators
   for(const t of [-.37,.0,.37]){
    box(car,silver,t*L,2.46,0,L*.17,.12,W*.57);
    for(let k=0;k<5;k++)box(car,dark,t*L+(k-2)*L*.025,2.525,0,.024,.012,W*.43);
+   for(const side of [-1,1])detailBox(car,dark,t*L,2.5,side*W*.26,L*.13,.045,.035);
+
   }
   // front and rear cab: windshield, destination sign, headlights, marker lights, couplers
   if(cab){
@@ -1334,28 +1397,47 @@ function build(d){
    box(car,glass,x+front*nose,1.96,0,.035,.55,W*.72);
    if(nose){box(car,body,x+front*.055,1.35,0,.13,.75,W*.94)}
    box(car,dark,x+front*.026,2.2,0,.022,.12,W*.35);
+   // Destination indicator, cab windscreen divider, wipers and lower front apron
+   detailBox(car,safety,x+front*.05,2.2,0,.028,.045,W*.25);
+   detailBox(car,silver,x+front*(nose+.02),1.96,0,.03,.52,.023);
+   for(const side of [-1,1]){
+    detailRod(car,black,[x+front*(nose+.035),1.74,side*W*.07],[x+front*(nose+.045),1.96,side*W*.31],.012);
+    detailBox(car,dark,x+front*.075,1.15,side*W*.39,.065,.12,.15);
+   }
+   detailBox(car,dark,x+front*.07,1.08,0,.09,.1,W*.86);
+   detailBox(car,silver,x+front*.09,.94,0,.08,.04,W*.9);
+
    for(const side of [-1,1]){
     box(car,white,x+front*.03,1.41,side*W*.35,.035,.13,.13);
     box(car,red,x+front*.035,1.28,side*W*.35,.035,.05,.11);
    }
    box(car,dark,x+front*.18,.79,0,.32,.15,.22);
    box(car,silver,x+front*.33,.79,0,.13,.09,.2);
+   detailBox(car,brass,x+front*.4,.79,0,.07,.09,.18);
+   detailBox(car,dark,x+front*.22,.72,0,.22,.045,.16);
+
    for(const side of [-1,1])box(car,rubber,x+front*.1,.88,side*W*.39,.18,.14,.08);
   }else{
    box(car,rubber,-L/2,.98,0,.11,.35,W*.62);
    box(car,rubber,L/2,.98,0,.11,.35,W*.62);
+   detailBox(car,dark,0,1.5,0,L-.06,.04,W*.9);
+   for(const side of [-1,1]){
+    detailBox(car,black,-L/2,1.6,side*W*.35,.07,.66,.04);
+    detailBox(car,black,L/2,1.6,side*W*.35,.07,.66,.04);
+   }
+
   }
  }
  // Track: rails, sleepers, ballast, no false claim of exact gauge compliance
  const trackLen=total+3;
- box(model,mat('#53616b',.1,.95),0,.02,0,trackLen,.07,2.8);
+ box(model,floorMat,0,.02,0,trackLen,.07,2.8);
  for(let x=-trackLen/2;x<trackLen/2;x+=.48)box(model,dark,x,.09,0,.17,.08,2.2);
  for(const z of [-.52,.52]){
   box(model,silver,0,.17,z,trackLen,.1,.085);
-  box(model,mat('#dce5ed',.7,.3),0,.23,z,trackLen,.02,.06);
+  box(model,silver,0,.23,z,trackLen,.02,.06);
  }
  const target=new THREE.Vector3(0,1.4,0);controls.target.copy(target);
- const distance=Math.max(9,total*.86);camera.position.set(distance*.75,Math.max(5,total*.25),distance*.75);
+ const distance=Math.max(9,total*.86);controls.maxDistance=Math.max(70,total*2);camera.position.set(distance*.75,Math.max(5,total*.25),distance*.75);
  camera.near=.05;camera.far=Math.max(200,total*4);camera.updateProjectionMatrix();controls.update();
 }
 let last=null,pending=false;
@@ -1364,7 +1446,7 @@ window.addEventListener('rsw-vehicle-preview',e=>{
  if(!pending){pending=true;requestAnimationFrame(()=>{pending=false;if(last)build(last)})}
 });
 const observer=new ResizeObserver(()=>resize());observer.observe(root);
-function resize(){const w=root.clientWidth,h=root.clientHeight;if(w<10||h<10)return;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()}
+let oldW=0,oldH=0;function resize(){const w=root.clientWidth,h=root.clientHeight;if(w<10||h<10||w===oldW&&h===oldH)return;oldW=w;oldH=h;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()}
 let frame=0;
 function animate(){requestAnimationFrame(animate);if(root.hidden||document.getElementById('engineeringOverlay').hidden)return;if(++frame%2)return;resize();controls.update();renderer.render(scene,camera)}
 animate();
