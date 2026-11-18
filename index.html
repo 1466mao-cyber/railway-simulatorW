@@ -165,6 +165,7 @@ function updateTrains(dt){
     const seg=routeSegments[train.block];
     const target=train.direction===1?seg.end:seg.start;
     const remaining=Math.abs(target-train.distance);
+    const vmax=(Number.isFinite(train.maxSpeed)?train.maxSpeed:Number($('maxSpeed').value))/3.6;
     const safeSpeed=Math.sqrt(2*brake*Math.max(0,remaining));
     train.speed=Math.max(0,Math.min(vmax,safeSpeed,train.speed+accel*elapsed));
     const step=Math.min(remaining,train.speed*elapsed);
