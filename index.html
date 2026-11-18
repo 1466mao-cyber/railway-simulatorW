@@ -1,6 +1,6 @@
-<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><title>Railway Simulator W 3D v0.3</title><style>
-*{box-sizing:border-box}body{margin:0;background:#10191c;color:#f0f3f4;font-family:system-ui,-apple-system,sans-serif;overflow:hidden}#scene{position:fixed;inset:0;touch-action:none}#top{position:fixed;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;gap:8px;background:#142025ed;padding:10px 12px;z-index:2;border-bottom:1px solid #45606a}#top strong{font-size:14px}#top small{display:block;color:#aabfc5;font-size:10px}#toolbar{position:fixed;bottom:10px;left:8px;right:8px;display:flex;flex-wrap:wrap;justify-content:center;gap:5px;z-index:3}button,.filebtn{background:#243940;color:white;border:1px solid #4d6a73;border-radius:9px;padding:10px;font-size:12px;font-weight:600;cursor:pointer}button.active{background:#147d8e;border-color:#72d3df}#panel{position:fixed;top:66px;left:9px;width:min(310px,calc(100vw - 18px));max-height:calc(100dvh - 185px);overflow:auto;background:#142025ed;border:1px solid #415b63;border-radius:12px;padding:11px;z-index:2;font-size:12px;line-height:1.5}#panel h2{margin:0 0 5px;font-size:14px}#status{color:#9ad5dc}#hint{color:#c3d2d5;margin-top:5px}#options{margin-top:8px;padding-top:8px;border-top:1px solid #45606a}#options label{display:block;margin:7px 0 3px}#options input,#options select{width:100%;font-size:13px;border-radius:6px;padding:8px;color:white;background:#243940;border:1px solid #58717a}#options input[type=checkbox]{width:auto}#options .row{display:flex;gap:8px;align-items:center}#options .row>*{flex:1}#options .row input[type=checkbox]{flex:0}#toast{position:fixed;top:66px;right:8px;background:#102b30f5;padding:10px;border-radius:9px;z-index:5;font-size:12px;max-width:55vw;display:none}#loading{position:fixed;inset:0;background:#10191c;z-index:10;display:grid;place-content:center;text-align:center;gap:12px}#progress{width:min(280px,80vw);height:7px;background:#314348;border-radius:9px;overflow:hidden}#bar{width:0;height:100%;background:#4eb9c9;transition:width .2s}#issues{color:#ffaaaa;margin-top:7px;white-space:pre-wrap}input[type=file]{display:none}@media(max-width:600px){#panel{top:63px;width:min(255px,calc(100vw - 18px));max-height:calc(100dvh - 195px)}#toolbar button,#toolbar .filebtn{padding:9px 7px;font-size:11px}#top strong{font-size:12px}}
-</style></head><body><div id="scene"></div><div id="top"><div><strong>RAILWAY SIMULATOR W</strong><small>3D WORLD • Prototype 0.3</small></div><div style="text-align:right"><span id="clock">06:00</span><br><small id="counter">駅 0 / 列車 0</small></div></div><div id="panel"><h2 id="modeName">ワールド表示</h2><div id="status">ワールドを生成しています</div><div id="hint">1本指で視点回転、2本指で移動・拡大縮小。</div><div id="options"><label>線路方式</label><select id="trackType"><option value="single">単線</option><option value="double">複線</option></select><label>駅の番線数</label><select id="platforms"><option value="1">1番線</option><option value="2" selected>2番線</option><option value="3">3番線</option><option value="4">4番線</option></select><label>ホーム有効長</label><select id="length"><option value="80">80 m</option><option value="120" selected>120 m</option><option value="160">160 m</option><option value="200">200 m</option><option value="240">240 m</option></select><label>駅名（空欄なら自動）</label><input id="stationName" maxlength="30" placeholder="駅1"><div class="row" style="margin-top:8px"><button id="panelToggle">設定を閉じる</button></div></div><div id="issues"></div><div id="trainPanel" style="margin-top:9px;padding-top:8px;border-top:1px solid #45606a"><b>🚆 列車運行</b><label>運転間隔（ゲーム内分）</label><select id="interval"><option value="5">5分</option><option value="10" selected>10分</option><option value="15">15分</option><option value="30">30分</option></select><label>最高速度</label><select id="maxSpeed"><option value="40">40 km/h</option><option value="70" selected>70 km/h</option><option value="100">100 km/h</option></select><div class="row" style="margin-top:8px"><button id="operate">▶ 運転開始</button><button id="speed">⏩ 10倍速</button></div><div id="trainStatus" style="color:#a5dce5;margin-top:6px">駅を2つ以上設置すると運転できます。</div><small style="color:#b6c5c9">試作版：列車は駅間を往復。閉塞・信号連動・ダイヤ競合判定は今後実装。</small></div></div><div id="toolbar"><button id="view" class="active">👁 視点</button><button id="station">🚉 駅設置</button><button id="remove">✕ 駅撤去</button><button id="settings">⚙ 設定</button><button id="trainButton">🚆 運行</button><button id="reset">🌏 新規生成</button><button id="save">💾 保存</button><label class="filebtn" for="load">📂 読込</label><input id="load" type="file" accept=".json,application/json"></div><div id="toast"></div><div id="loading"><strong>RAILWAY SIMULATOR W</strong><div>3Dワールドを生成中…</div><div id="progress"><div id="bar"></div></div><small id="loadText">初期化中</small></div>
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><title>Railway Simulator W 3D v0.4</title><style>
+*{box-sizing:border-box}body{margin:0;background:#10191c;color:#f0f3f4;font-family:system-ui,-apple-system,sans-serif;overflow:hidden}#scene{position:fixed;inset:0;touch-action:none}#top{position:fixed;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;gap:8px;background:#142025ed;padding:10px 12px;z-index:2;border-bottom:1px solid #45606a}#top strong{font-size:14px}#top small{display:block;color:#aabfc5;font-size:10px}#toolbar{position:fixed;bottom:10px;left:8px;right:8px;display:flex;flex-wrap:wrap;justify-content:center;gap:5px;z-index:3}button,.filebtn{background:#243940;color:white;border:1px solid #4d6a73;border-radius:9px;padding:10px;font-size:12px;font-weight:600;cursor:pointer}button.active{background:#147d8e;border-color:#72d3df}#panel{position:fixed;top:66px;left:9px;width:min(310px,calc(100vw - 18px));max-height:calc(100dvh - 185px);overflow:auto;background:#142025ed;border:1px solid #415b63;border-radius:12px;padding:11px;z-index:2;font-size:12px;line-height:1.5}#panel h2{margin:0 0 5px;font-size:14px}#status{color:#9ad5dc}#hint{color:#c3d2d5;margin-top:5px}#options{margin-top:8px;padding-top:8px;border-top:1px solid #45606a}#options label{display:block;margin:7px 0 3px}#options input,#options select{width:100%;font-size:13px;border-radius:6px;padding:8px;color:white;background:#243940;border:1px solid #58717a}#options input[type=checkbox]{width:auto}#options .row{display:flex;gap:8px;align-items:center}#options .row>*{flex:1}#options .row input[type=checkbox]{flex:0}#toast{position:fixed;top:66px;right:8px;background:#102b30f5;padding:10px;border-radius:9px;z-index:5;font-size:12px;max-width:55vw;display:none}#loading{position:fixed;inset:0;background:#10191c;z-index:10;display:grid;place-content:center;text-align:center;gap:12px}#progress{width:min(280px,80vw);height:7px;background:#314348;border-radius:9px;overflow:hidden}#bar{width:0;height:100%;background:#4eb9c9;transition:width .2s}#timetable{font-size:11px;max-height:120px;overflow:auto;color:#c9d8da;margin-top:6px}#timetable div{border-bottom:1px solid #35505a;padding:3px 0}#issues{color:#ffaaaa;margin-top:7px;white-space:pre-wrap}input[type=file]{display:none}@media(max-width:600px){#panel{top:63px;width:min(255px,calc(100vw - 18px));max-height:calc(100dvh - 195px)}#toolbar button,#toolbar .filebtn{padding:9px 7px;font-size:11px}#top strong{font-size:12px}}
+</style></head><body><div id="scene"></div><div id="top"><div><strong>RAILWAY SIMULATOR W</strong><small>3D WORLD • Prototype 0.4</small></div><div style="text-align:right"><span id="clock">06:00</span><br><small id="counter">駅 0 / 列車 0</small></div></div><div id="panel"><h2 id="modeName">ワールド表示</h2><div id="status">ワールドを生成しています</div><div id="hint">1本指で視点回転、2本指で移動・拡大縮小。</div><div id="options"><label>線路方式</label><select id="trackType"><option value="single">単線</option><option value="double">複線</option></select><label>駅の番線数</label><select id="platforms"><option value="1">1番線</option><option value="2" selected>2番線</option><option value="3">3番線</option><option value="4">4番線</option></select><label>ホーム有効長</label><select id="length"><option value="80">80 m</option><option value="120" selected>120 m</option><option value="160">160 m</option><option value="200">200 m</option><option value="240">240 m</option></select><label>駅名（空欄なら自動）</label><input id="stationName" maxlength="30" placeholder="駅1"><div class="row" style="margin-top:8px"><button id="panelToggle">設定を閉じる</button></div></div><div id="issues"></div><div id="trainPanel" style="margin-top:9px;padding-top:8px;border-top:1px solid #45606a"><b>🚆 列車運行</b><label>運転間隔（ゲーム内分）</label><select id="interval"><option value="5">5分</option><option value="10" selected>10分</option><option value="15">15分</option><option value="30">30分</option></select><label>最高速度</label><select id="maxSpeed"><option value="40">40 km/h</option><option value="70" selected>70 km/h</option><option value="100">100 km/h</option></select><div class="row" style="margin-top:8px"><button id="operate">▶ 運転開始</button><button id="speed">⏩ 10倍速</button></div><div style="margin-top:9px"><b>🚦 信号・閉塞</b><div id="signalStatus" style="color:#b7d7dd;margin-top:4px">駅間を1閉塞として管理</div></div><div style="margin-top:8px"><b>📋 運行記録</b><div id="timetable">運転開始後に表示します</div></div><div id="trainStatus" style="color:#a5dce5;margin-top:6px">駅を2つ以上設置すると運転できます。</div><small style="color:#b6c5c9">試作版：駅間を1閉塞として列車の進入を制限。正式な連動装置・ダイヤ編集は未実装。</small></div></div><div id="toolbar"><button id="view" class="active">👁 視点</button><button id="station">🚉 駅設置</button><button id="remove">✕ 駅撤去</button><button id="settings">⚙ 設定</button><button id="trainButton">🚆 運行</button><button id="reset">🌏 新規生成</button><button id="save">💾 保存</button><label class="filebtn" for="load">📂 読込</label><input id="load" type="file" accept=".json,application/json"></div><div id="toast"></div><div id="loading"><strong>RAILWAY SIMULATOR W</strong><div>3Dワールドを生成中…</div><div id="progress"><div id="bar"></div></div><small id="loadText">初期化中</small></div>
 <script>window.__loaded3d=false;function showBootError(message){if(window.__loaded3d)return;const el=document.getElementById('loadText');if(el){el.textContent='起動エラー: '+message;el.style.color='#ff9b9b'}}window.addEventListener('error',e=>showBootError(e.message||'スクリプト読み込み失敗'));window.addEventListener('unhandledrejection',e=>showBootError(String(e.reason?.message||e.reason||'初期化失敗')));setTimeout(()=>{if(!window.__loaded3d)showBootError('通信または3D初期化がタイムアウトしました')},18000);</script>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/"}}</script><script type="module">
 import * as THREE from 'three';import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
@@ -25,7 +25,7 @@ const trainGroup=new THREE.Group();scene.add(trainGroup);
 const trainBodyMat=new THREE.MeshStandardMaterial({color:0xe5e8e8,metalness:.32,roughness:.45});
 const trainStripeMat=new THREE.MeshStandardMaterial({color:0x8a242a,roughness:.45});
 const trainWindowMat=new THREE.MeshStandardMaterial({color:0x243a48,metalness:.25,roughness:.18});
-let running=false,simulationSeconds=0,timeScale=10,trainObjects=[],routeSegments=[],routeLength=0,dispatchSeconds=0;
+let running=false,simulationSeconds=0,timeScale=10,trainObjects=[],routeSegments=[],routeLength=0,dispatchSeconds=0,trainSerial=0,history=[],signalMeshes=[];
 function trainMesh(){
  const g=new THREE.Group();
  // local +X is forward; dimensions are in metres.
@@ -37,53 +37,98 @@ function trainMesh(){
  const tail=box(.12,1.5,2.2,trainWindowMat,-9.04,2.85,0,g);
  trainGroup.add(g);return g;
 }
+// Ver.0.4: each station-to-station segment is a protected block.
+const signalGreen=new THREE.MeshStandardMaterial({color:0x31e67c,emissive:0x168342,emissiveIntensity:.9});
+const signalRed=new THREE.MeshStandardMaterial({color:0xff3d40,emissive:0xc02020,emissiveIntensity:1});
+const signalDark=new THREE.MeshStandardMaterial({color:0x253039});
+function clockText(){const m=Math.floor(simulationSeconds/60)+360;return `${String(Math.floor(m/60)%24).padStart(2,'0')}:${String(m%60).padStart(2,'0')}`}
+function record(text){history.unshift(`${clockText()}　${text}`);history=history.slice(0,18);$('timetable').replaceChildren(...history.map(t=>{const e=document.createElement('div');e.textContent=t;return e}))}
+function updateSignals(){
+ let occupied=0;
+ for(let i=0;i<routeSegments.length;i++){
+  const busy=trainObjects.some(t=>t.block===i);if(busy)occupied++;
+  for(const sig of signalMeshes.filter(v=>v.block===i))sig.lamp.material=busy?signalRed:signalGreen;
+ }
+ $('signalStatus').textContent=`閉塞 ${routeSegments.length}区間 / 使用中 ${occupied}区間 / 空き ${routeSegments.length-occupied}区間`;
+}
+function addSignal(block,atEnd){
+ const seg=routeSegments[block],loc=pointOnRoute(atEnd?seg.end:seg.start);if(!loc)return;
+ const side=new THREE.Vector3(-loc.dir.z,0,loc.dir.x).multiplyScalar(atEnd?-4:4);
+ const base=loc.p.clone().add(side);const pole=box(.22,4.3,.22,signalDark,base.x,base.y+2,base.z,infrastructure);
+ const lamp=new THREE.Mesh(new THREE.SphereGeometry(.55,9,7),signalGreen);
+ lamp.position.set(base.x,base.y+4.4,base.z);infrastructure.add(lamp);signalMeshes.push({block,lamp});
+}
 function buildTrainRoutes(){
- trainGroup.clear();trainObjects=[];routeSegments=[];routeLength=0;
+ trainGroup.clear();trainObjects=[];routeSegments=[];routeLength=0;signalMeshes=[];
  for(let i=1;i<stations.length;i++){
   const a=stations[i-1],b=stations[i],dist=Math.hypot(b.x-a.x,b.z-a.z);
   if(dist<55)continue;
-  const pts=routePoints(a,b),curve=new THREE.CatmullRomCurve3(pts);
-  const length=curve.getLength();routeSegments.push({curve,start:routeLength,end:routeLength+length,length,stationIndex:i});routeLength+=length;
+  const curve=new THREE.CatmullRomCurve3(routePoints(a,b));const length=curve.getLength();
+  routeSegments.push({curve,start:routeLength,end:routeLength+length,length,stationIndex:i});routeLength+=length;
  }
+ for(let i=0;i<routeSegments.length;i++){addSignal(i,false);addSignal(i,true)}
  if(running&&routeLength>0)spawnTrain();
  if(routeLength<=0){running=false;$('operate').textContent='▶ 運転開始'}
- updateTrainStatus();
+ updateSignals();updateTrainStatus();
 }
 function pointOnRoute(distance){
  if(!routeSegments.length)return null;
  const d=Math.max(0,Math.min(routeLength,distance));
  const seg=routeSegments.find(s=>d<=s.end)||routeSegments[routeSegments.length-1];
  const t=Math.max(0,Math.min(1,(d-seg.start)/seg.length));
- const p=seg.curve.getPointAt(t),dir=seg.curve.getTangentAt(t).normalize();return {p,dir};
+ return {p:seg.curve.getPointAt(t),dir:seg.curve.getTangentAt(t).normalize()};
 }
 function spawnTrain(){
- if(!routeLength||trainObjects.length>=8)return;
- const mesh=trainMesh();trainObjects.push({mesh,distance:0,direction:1,speed:0,dwell:12});
+ if(!routeLength||trainObjects.length>=8)return false;
+ // The departure platform and its first block must be free.
+ if(trainObjects.some(t=>t.block===0||t.distance<35))return false;
+ const mesh=trainMesh(),id=++trainSerial;
+ trainObjects.push({id,mesh,distance:0,direction:1,speed:0,dwell:12,block:-1,waiting:false});
+ record(`${id}列車 ${stations[0]?.name||'始発駅'} 出庫`);updateSignals();return true;
 }
 function updateTrainStatus(){
  const s=$('trainStatus');if(!s)return;
- s.textContent=`${running?'運転中':'停止中'} / ${trainObjects.length}編成 / 路線長 ${Math.round(routeLength)}m / ${timeScale}倍速`;
+ const waits=trainObjects.filter(t=>t.waiting).length;
+ s.textContent=`${running?'運転中':'停止中'} / ${trainObjects.length}編成 / 信号待ち ${waits}編成 / 路線長 ${Math.round(routeLength)}m / ${timeScale}倍速`;
+ $('counter').textContent=`駅 ${stations.length} / 列車 ${trainObjects.length}`;
+}
+function nextBlock(train){
+ if(train.direction===1){return routeSegments.findIndex(seg=>seg.start>=train.distance-.3)}
+ for(let i=routeSegments.length-1;i>=0;i--)if(routeSegments[i].end<=train.distance+.3)return i;
+ return -1;
 }
 function updateTrains(dt){
  if(!running||!routeLength)return;
- const elapsed=Math.min(dt,.07)*timeScale;
- simulationSeconds+=elapsed;dispatchSeconds+=elapsed;
+ const elapsed=Math.min(dt,.07)*timeScale;simulationSeconds+=elapsed;dispatchSeconds+=elapsed;
  const interval=Number($('interval').value)*60;
- if(dispatchSeconds>=interval){dispatchSeconds=0;spawnTrain()}
+ if(dispatchSeconds>=interval){if(spawnTrain())dispatchSeconds=0;else dispatchSeconds=interval}
  const vmax=Number($('maxSpeed').value)/3.6,accel=.65,brake=.85;
  for(const train of trainObjects){
-  if(train.dwell>0){train.dwell=Math.max(0,train.dwell-elapsed);train.speed=0}
+  if(train.dwell>0){train.dwell=Math.max(0,train.dwell-elapsed);train.speed=0;train.waiting=false}
   else{
-   let next=routeLength;
-   if(train.direction===1){for(const seg of routeSegments){if(seg.end>train.distance+.2){next=seg.end;break}}}
-   else{next=0;for(let i=routeSegments.length-1;i>=0;i--){const start=routeSegments[i].start;if(start<train.distance-.2){next=start;break}}}
-   const remaining=Math.abs(next-train.distance),safeSpeed=Math.sqrt(2*brake*Math.max(0,remaining));
-   train.speed=Math.max(0,Math.min(vmax,safeSpeed,train.speed+accel*elapsed));
-   const step=Math.min(remaining,train.speed*elapsed);train.distance+=step*train.direction;
-   if(remaining<=Math.max(.25,step+.02)){
-    train.distance=next;train.speed=0;train.dwell=20;
-    if(next>=routeLength-.1)train.direction=-1;
-    else if(next<=.1)train.direction=1;
+   if(train.block<0){
+    const b=nextBlock(train);
+    if(b<0){train.speed=0;continue}
+    if(trainObjects.some(other=>other!==train&&other.block===b)){
+     train.speed=0;train.waiting=true;
+    }else{train.block=b;train.waiting=false;record(`${train.id}列車 第${b+1}閉塞へ進入`)}
+   }
+   if(train.block>=0){
+    const seg=routeSegments[train.block];
+    const target=train.direction===1?seg.end:seg.start;
+    const remaining=Math.abs(target-train.distance);
+    const safeSpeed=Math.sqrt(2*brake*Math.max(0,remaining));
+    train.speed=Math.max(0,Math.min(vmax,safeSpeed,train.speed+accel*elapsed));
+    const step=Math.min(remaining,train.speed*elapsed);
+    train.distance+=step*train.direction;
+    if(remaining<=Math.max(.25,step+.02)){
+     train.distance=target;train.speed=0;train.block=-1;train.dwell=20;
+     if(target>=routeLength-.1)train.direction=-1;
+     else if(target<=.1)train.direction=1;
+     const stationIndex=routeSegments.findIndex(s=>Math.abs(s.end-target)<.5)+1;
+     const station=stations[target<=.1?0:stationIndex];
+     record(`${train.id}列車 ${station?.name||'駅'} 到着`);
+    }
    }
   }
   const loc=pointOnRoute(train.distance);if(loc){
@@ -92,8 +137,7 @@ function updateTrains(dt){
    train.mesh.rotation.y=-Math.atan2(dir.z,dir.x);
   }
  }
- $('clock').textContent=`${String((6+Math.floor(simulationSeconds/3600))%24).padStart(2,'0')}:${String(Math.floor(simulationSeconds/60)%60).padStart(2,'0')}`;
- updateTrainStatus();
+ $('clock').textContent=clockText();updateSignals();updateTrainStatus();
 }
 $('operate').onclick=()=>{
  if(!running&&routeLength<=0){toast('先に駅を2つ以上設置してください');return}
@@ -108,10 +152,10 @@ function toast(t){$('toast').textContent=t;$('toast').style.display='block';clea
 function setMode(m){mode=m;for(const id of ['view','station','remove'])$(id).classList.toggle('active',id===m);$('modeName').textContent={view:'ワールド表示',station:'駅の設置',remove:'駅の撤去'}[m];$('hint').textContent={view:'1本指ドラッグで視点回転、2本指で移動・ズーム。',station:'地面を短くタップして駅を設置。駅名・番線数・ホーム長は設定欄から指定。',remove:'撤去したい駅の近くをタップ。'}[m]}
 for(const m of ['view','station','remove'])$(m).onclick=()=>setMode(m);$('settings').onclick=()=>{$('options').hidden=!$('options').hidden};$('panelToggle').onclick=()=>{$('options').hidden=true};$('trackType').onchange=e=>{trackType=e.target.value;redraw();toast(trackType==='double'?'複線に変更':'単線に変更')};
 let down=null;renderer.domElement.addEventListener('pointerdown',e=>{if(e.isPrimary)down={x:e.clientX,y:e.clientY,t:Date.now(),multi:false};else if(down)down.multi=true});renderer.domElement.addEventListener('pointercancel',()=>down=null);renderer.domElement.addEventListener('pointerup',e=>{if(!down||down.multi||!e.isPrimary||Math.hypot(e.clientX-down.x,e.clientY-down.y)>9||Date.now()-down.t>550){down=null;return}down=null;if(mode==='view')return;const r=renderer.domElement.getBoundingClientRect();pointer.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);raycaster.setFromCamera(pointer,camera);const hits=raycaster.intersectObject(terrain);if(!hits.length)return;const p=hits[0].point;if(mode==='station'){if(stations.some(s=>Math.hypot(s.x-p.x,s.z-p.z)<55)){toast('駅同士は55m以上離して設置してください');return}const name=$('stationName').value.trim()||`駅${nextId}`,platforms=Number($('platforms').value),length=Number($('length').value);stations.push({id:nextId++,name,x:p.x,z:p.z,platforms,length});$('stationName').value='';redraw();toast(name+'を設置しました')}else if(mode==='remove'){const i=stations.findIndex(s=>Math.hypot(s.x-p.x,s.z-p.z)<30);if(i<0){toast('駅の近くをタップしてください');return}stations.splice(i,1);redraw();toast('駅を撤去しました')}});
-function reset(newSeed){running=false;simulationSeconds=0;dispatchSeconds=0;$('operate').textContent='▶ 運転開始';$('clock').textContent='06:00';seed=newSeed;stations=[];nextId=1;trackType='single';$('trackType').value='single';makeTerrain();makeTown();redraw();controls.target.set(0,elevation(0,0),0);camera.position.set(160,180,240);controls.update()}
+function reset(newSeed){running=false;simulationSeconds=0;dispatchSeconds=0;trainSerial=0;history=[];$('timetable').textContent='運転開始後に表示します';$('operate').textContent='▶ 運転開始';$('clock').textContent='06:00';seed=newSeed;stations=[];nextId=1;trackType='single';$('trackType').value='single';makeTerrain();makeTown();redraw();controls.target.set(0,elevation(0,0),0);camera.position.set(160,180,240);controls.update()}
 $('reset').onclick=()=>{if(confirm('現在のワールドを消して新規生成しますか？ 未保存の変更は失われます。')){reset(Math.floor(Math.random()*100000));toast('新しいワールドを生成しました')}};
-$('save').onclick=()=>{const data={format:'railway-simulator-w',version:3,seed,trackType,stations,operation:{interval:Number($('interval').value),maxSpeed:Number($('maxSpeed').value),timeScale}};const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='railway-simulator-w-save-v03.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1500);toast('セーブデータを出力しました')};
-$('load').onchange=async e=>{const file=e.target.files?.[0];if(!file)return;try{const data=JSON.parse(await file.text());if(data.format!=='railway-simulator-w'||![1,2,3].includes(data.version)||!Array.isArray(data.stations)||data.stations.length>500||!Number.isFinite(data.seed)||!data.stations.every(s=>Number.isFinite(s.x)&&Number.isFinite(s.z)&&Math.abs(s.x)<=800&&Math.abs(s.z)<=800&&typeof s.name==='string'))throw Error('セーブデータの形式が正しくありません');reset(data.seed);trackType=data.trackType==='double'?'double':'single';$('trackType').value=trackType;stations=data.stations.map((s,i)=>({id:i+1,name:s.name.slice(0,30),x:s.x,z:s.z,platforms:[1,2,3,4].includes(s.platforms)?s.platforms:2,length:[80,120,160,200,240].includes(s.length)?s.length:120}));nextId=stations.length+1;if(data.operation){$('interval').value=String([5,10,15,30].includes(data.operation.interval)?data.operation.interval:10);$('maxSpeed').value=String([40,70,100].includes(data.operation.maxSpeed)?data.operation.maxSpeed:70)}redraw();toast(`セーブデータ Ver.${data.version} を読み込みました`)}catch(err){toast('読み込み失敗: '+err.message)}e.target.value=''};
+$('save').onclick=()=>{const data={format:'railway-simulator-w',version:4,seed,trackType,stations,operation:{interval:Number($('interval').value),maxSpeed:Number($('maxSpeed').value),timeScale}};const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='railway-simulator-w-save-v04.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1500);toast('セーブデータを出力しました')};
+$('load').onchange=async e=>{const file=e.target.files?.[0];if(!file)return;try{const data=JSON.parse(await file.text());if(data.format!=='railway-simulator-w'||![1,2,3,4].includes(data.version)||!Array.isArray(data.stations)||data.stations.length>500||!Number.isFinite(data.seed)||!data.stations.every(s=>Number.isFinite(s.x)&&Number.isFinite(s.z)&&Math.abs(s.x)<=800&&Math.abs(s.z)<=800&&typeof s.name==='string'))throw Error('セーブデータの形式が正しくありません');reset(data.seed);trackType=data.trackType==='double'?'double':'single';$('trackType').value=trackType;stations=data.stations.map((s,i)=>({id:i+1,name:s.name.slice(0,30),x:s.x,z:s.z,platforms:[1,2,3,4].includes(s.platforms)?s.platforms:2,length:[80,120,160,200,240].includes(s.length)?s.length:120}));nextId=stations.length+1;if(data.operation){$('interval').value=String([5,10,15,30].includes(data.operation.interval)?data.operation.interval:10);$('maxSpeed').value=String([40,70,100].includes(data.operation.maxSpeed)?data.operation.maxSpeed:70);timeScale=[1,10,30].includes(data.operation.timeScale)?data.operation.timeScale:10;$('speed').textContent=`⏩ ${timeScale}倍速`}redraw();toast(`セーブデータ Ver.${data.version} を読み込みました`)}catch(err){toast('読み込み失敗: '+err.message)}e.target.value=''};
 window.addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight)});let previousFrame=0;function animate(now=0){requestAnimationFrame(animate);const dt=previousFrame?(now-previousFrame)/1000:0;previousFrame=now;updateTrains(dt);controls.update();renderer.render(scene,camera)}
 updateLoad(15,'3D描画を初期化');await new Promise(r=>setTimeout(r,70));updateLoad(45,'地形を生成');reset(2401);await new Promise(r=>setTimeout(r,70));updateLoad(85,'建物と道路を配置');await new Promise(r=>setTimeout(r,70));updateLoad(100,'準備完了');$('loading').style.display='none';window.__loaded3d=true;setMode('view');animate();
 </script></body></html>
