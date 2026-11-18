@@ -266,7 +266,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
 <button id="factoryExport" type="button">📤 発注台帳を書き出す</button><div id="factoryBalance" class="factorySmall" aria-live="polite"></div>
 <h3>📋 発注・製造・納車台帳</h3><div id="factoryOrders" class="factorySmall"></div>
 <div class="factorySmall">※ 新規発注は経営資金から即時決済されます。納車時に保有車両へ登録。Ver.3.8以前の発注履歴は二重請求を避けるため未決済の参考記録として残します。</div>
-</section><div class="engGrid"><section class="engCard"><h3>設計書</h3><select id="engDesigns" aria-label="保存した設計書"></select><div class="engActions"><button id="engNew">＋ 新規</button><button id="engSave">保存</button><button id="engDuplicate">複製</button><button id="engDelete">削除</button></div><div class="engQuick"><label>車両の用途<select id="engPreset"><option value="commuter">通勤型</option><option value="suburban">近郊型</option><option value="express">特急型</option><option value="metro">地下鉄型</option></select></label><label>編成両数<select id="engQuickCars"><option>2</option><option selected>4</option><option>6</option><option>8</option><option>10</option><option>12</option></select></label><button type="button" id="engAuto">⚙ 合理的な仕様を自動設定</button></div><div class="engActions"><button type="button" id="engAdvanced">詳細設定を表示</button><span id="engAutoInfo">主要項目だけ選んで自動設計できます</span></div><div class="engPreview"><div class="engPreviewHead"><strong>🚃 車両プレビュー</strong><span>編成・車体寸法・電動車配置を反映</span></div><div class="engPreviewTabs"><button type="button" id="engPreviewSide" class="active">側面</button><button type="button" id="engPreviewFront">正面</button><button type="button" id="engPreview3D">3D精密</button><button type="button" id="engPreviewDetail" title="ディテール表示を切替">精密表示 ON</button></div><div id="engPreviewCanvas" role="img" aria-label="設計中の車両の概略図"></div><div id="eng3DCanvas" hidden></div><div id="engDetailView" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0"><label>3D表示範囲 <select id="engModelScope" style="padding:7px;background:#20364b;color:#fff;border:1px solid #7195ac;border-radius:7px"><option value="one" selected>先頭車1両を大きく見る</option><option value="all">編成全体を見る</option></select></label><label>観察角度 <select id="engViewAngle" style="padding:7px;background:#20364b;color:#fff;border:1px solid #7195ac;border-radius:7px"><option value="three">斜め前</option><option value="front">正面</option><option value="side">側面</option><option value="roof">屋根上</option></select></label><button type="button" id="engApplyAngle" style="padding:7px;border-radius:7px">視点変更</button></div><div id="engCameraControls" hidden style="display:flex;gap:7px;flex-wrap:wrap;margin-top:8px"><label style="font-size:12px">カメラ位置 <select id="engCameraMode" style="background:#20364b;color:white;border-radius:7px;padding:7px"><option value="outside">車外</option><option value="saloon">客室</option><option value="cab">運転台</option></select></label><button type="button" id="engCameraReset">視点をリセット</button><span style="font-size:11px;opacity:.8">ドラッグで視点回転・ピンチで拡大</span></div><div id="engDimensionInfo" style="font-size:12px;opacity:.85;padding:6px 0"></div><div id="engPreviewCaption"></div><small>Ver.4.2：現代型／クラシック型で前面・屋根・側面・灯具・帯の構造を切り替え。3Dは汎用近似モデルであり実車の製造図面ではありません。</small></div><div class="engAppearance"><h3>🎨 車両外観デザイン</h3><div style="padding:9px 10px;margin-bottom:10px;background:#1b3349;border:1px solid #587c96;border-radius:8px"><label style="display:block;font-weight:700">🚆 車体世代・造形プリセット<select id="engEra" style="width:100%;margin-top:5px;padding:9px;background:#20364b;color:#fff;border:1px solid #7195ac;border-radius:7px"><option value="modern">現代型 — ワイド前面ガラス・LED灯具・連続窓帯</option><option value="classic">クラシック型 — 分割前面窓・角型灯具・雨樋・戸袋窓</option></select></label><small>車体世代を切り替えると3Dモデルの前面・屋根・側面デザインが大きく変化します。実在車両の完全再現ではありません。</small></div><div style="display:flex;gap:7px;flex-wrap:wrap;margin:8px 0"><button type="button" class="engLivery" data-livery="steel">銀色車体＋青帯</button><button type="button" class="engLivery" data-livery="maroon">マルーン塗装</button><button type="button" class="engLivery" data-livery="white">白色車体＋青帯</button><button type="button" class="engLivery" data-livery="silver">銀色車体＋緑帯</button></div><div class="engAppearanceGrid">
+</section><div class="engGrid"><section class="engCard"><h3>設計書</h3><select id="engDesigns" aria-label="保存した設計書"></select><div class="engActions"><button id="engNew">＋ 新規</button><button id="engSave">保存</button><button id="engDuplicate">複製</button><button id="engDelete">削除</button></div><div class="engQuick"><label>車両の用途<select id="engPreset"><option value="commuter">通勤型</option><option value="suburban">近郊型</option><option value="express">特急型</option><option value="metro">地下鉄型</option></select></label><label>編成両数<select id="engQuickCars"><option>2</option><option selected>4</option><option>6</option><option>8</option><option>10</option><option>12</option></select></label><button type="button" id="engAuto">⚙ 合理的な仕様を自動設定</button></div><div class="engActions"><button type="button" id="engAdvanced">詳細設定を表示</button><span id="engAutoInfo">主要項目だけ選んで自動設計できます</span></div><div class="engPreview"><div class="engPreviewHead"><strong>🚃 車両プレビュー</strong><span>編成・車体寸法・電動車配置を反映</span></div><div class="engPreviewTabs"><button type="button" id="engPreviewSide" class="active">側面</button><button type="button" id="engPreviewFront">正面</button><button type="button" id="engPreview3D">3D精密</button><button type="button" id="engPreviewDetail" title="ディテール表示を切替">精密表示 ON</button></div><div id="engPreviewCanvas" role="img" aria-label="設計中の車両の概略図"></div><div id="eng3DCanvas" hidden></div><div id="engDetailView" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0"><label>3D表示範囲 <select id="engModelScope" style="padding:7px;background:#20364b;color:#fff;border:1px solid #7195ac;border-radius:7px"><option value="one" selected>先頭車1両を大きく見る</option><option value="all">編成全体を見る</option></select></label><label>観察角度 <select id="engViewAngle" style="padding:7px;background:#20364b;color:#fff;border:1px solid #7195ac;border-radius:7px"><option value="three">斜め前</option><option value="front">正面</option><option value="side">側面</option><option value="roof">屋根上</option></select></label><button type="button" id="engApplyAngle" style="padding:7px;border-radius:7px">視点変更</button></div><div id="engCameraControls" hidden style="display:flex;gap:7px;flex-wrap:wrap;margin-top:8px"><label style="font-size:12px">カメラ位置 <select id="engCameraMode" style="background:#20364b;color:white;border-radius:7px;padding:7px"><option value="outside">車外</option><option value="saloon">客室</option><option value="cab">運転台</option></select></label><button type="button" id="engCameraReset">視点をリセット</button><span style="font-size:11px;opacity:.8">ドラッグで視点回転・ピンチで拡大</span></div><div id="engDimensionInfo" style="font-size:12px;opacity:.85;padding:6px 0"></div><div id="engPreviewCaption"></div><small>Ver.4.3：現代型／クラシック型で前面・屋根・側面・灯具・帯の構造を切り替え。3Dは汎用近似モデルであり実車の製造図面ではありません。</small></div><div class="engAppearance"><h3>🎨 車両外観デザイン</h3><div style="padding:9px 10px;margin-bottom:10px;background:#1b3349;border:1px solid #587c96;border-radius:8px"><label style="display:block;font-weight:700">🚆 車体世代・造形プリセット<select id="engEra" style="width:100%;margin-top:5px;padding:9px;background:#20364b;color:#fff;border:1px solid #7195ac;border-radius:7px"><option value="modern">現代型 — ワイド前面ガラス・LED灯具・連続窓帯</option><option value="classic">クラシック型 — 分割前面窓・角型灯具・雨樋・戸袋窓</option></select></label><small>車体世代を切り替えると3Dモデルの前面・屋根・側面デザインが大きく変化します。実在車両の完全再現ではありません。</small></div><div style="display:flex;gap:7px;flex-wrap:wrap;margin:8px 0"><button type="button" class="engLivery" data-livery="steel">銀色車体＋青帯</button><button type="button" class="engLivery" data-livery="maroon">マルーン塗装</button><button type="button" class="engLivery" data-livery="white">白色車体＋青帯</button><button type="button" class="engLivery" data-livery="silver">銀色車体＋緑帯</button></div><div class="engAppearanceGrid">
 <label>車体カラー<input id="engBodyColor" type="color" value="#d8e0e8"></label>
 <label>帯カラー<input id="engStripeColor" type="color" value="#ba477b"></label>
 <label>前面形状<select id="engFrontShape"><option value="flat">平妻型</option><option value="slant">傾斜型</option><option value="rounded">丸みのある前面</option></select></label>
@@ -1430,10 +1430,10 @@ scopeControl.addEventListener('change',()=>{previewScope=scopeControl.value;if(l
 document.getElementById('engApplyAngle').addEventListener('click',()=>{if(last)applyCamera(last)});
 let detailEnabled=true;document.getElementById('engPreviewDetail').addEventListener('click',e=>{detailEnabled=!detailEnabled;e.currentTarget.textContent='精密表示 '+(detailEnabled?'ON':'OFF');if(last)build(last)});
 const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true,powerPreference:'low-power'});
-renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.75));renderer.outputColorSpace=THREE.SRGBColorSpace;
+renderer.setPixelRatio(Math.min(devicePixelRatio||1,2));renderer.outputColorSpace=THREE.SRGBColorSpace;
 renderer.shadowMap.enabled=false;root.appendChild(renderer.domElement);
-const scene=new THREE.Scene();scene.background=new THREE.Color('#142638');
-scene.fog=new THREE.Fog('#142638',35,100);
+const scene=new THREE.Scene();scene.background=new THREE.Color('#26384a');
+scene.fog=new THREE.Fog('#26384a',35,100);
 const camera=new THREE.PerspectiveCamera(38,1,.05,200);camera.position.set(15,9,18);
 const controls=new OrbitControls(camera,renderer.domElement);controls.enableDamping=true;controls.dampingFactor=.08;controls.minDistance=4;controls.maxDistance=170;controls.maxPolarAngle=Math.PI*.86;
 scene.add(new THREE.HemisphereLight(0xc9e8ff,0x354253,2.2));
@@ -1684,6 +1684,80 @@ function cabHardware(car,L,W,front,era){
   }
  }
 }
+function noseSkin(car,L,W,front,era){
+ // Smooth, full-height, width-curved cab nose. Profile shifts with height and width.
+ const modern=era==='modern',N=18,R=16,vertices=[],indices=[];
+ const x0=front*(L/2-.11);
+ for(let j=0;j<=R;j++){
+  const t=j/R,y=.99+t*1.38;
+  const shift=modern?.10+.32*Math.sin(Math.PI*t*.87):.055;
+  const half=W*(modern?.46:.485)*(1-.045*Math.pow(2*t-1,2));
+  for(let k=0;k<=N;k++){
+   const u=2*k/N-1;
+   const bow=(modern?.25:.065)*(1-u*u);
+   vertices.push(x0+front*(shift+bow),y,half*u);
+  }
+ }
+ for(let j=0;j<R;j++)for(let k=0;k<N;k++){
+  const a=j*(N+1)+k,b=a+N+1;
+  indices.push(a,b,a+1,b,b+1,a+1);
+ }
+ const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(vertices,3));g.setIndex(indices);g.computeVertexNormals();
+ const m=new THREE.Mesh(g,new THREE.MeshStandardMaterial({color:body.color,metalness:body.metalness,roughness:body.roughness,side:THREE.DoubleSide}));car.add(m);
+ // Distinct sideward taper and a continuous bottom valance.
+ for(const side of [-1,1]){
+  const z=side*W*.46;
+  const cheek=box(car,body,x0-front*.13,1.43,z,.27,.77,.08);
+  cheek.rotation.z=front*(modern?.13:.035);
+  detailBox(car,dark,x0+front*.14,1.02,side*W*.38,.19,.085,.11);
+ }
+}
+function highDetailFront(car,L,W,front,era){
+ const modern=era==='modern',x=front*(L/2+.20);
+ // A true rounded polygon for glazing, instead of an oversized rectangular window.
+ const glassShape=new THREE.Shape();
+ if(modern){
+  glassShape.moveTo(-W*.38,1.79);glassShape.lineTo(W*.38,1.79);
+  glassShape.quadraticCurveTo(W*.45,2.12,W*.32,2.285);
+  glassShape.quadraticCurveTo(0,2.335,-W*.32,2.285);
+  glassShape.quadraticCurveTo(-W*.45,2.12,-W*.38,1.79);
+ }else{
+  glassShape.moveTo(-W*.40,1.82);glassShape.lineTo(W*.40,1.82);
+  glassShape.lineTo(W*.40,2.24);glassShape.lineTo(-W*.40,2.24);
+ }
+ const addFace=(material,depth,scale)=>{
+  const g=new THREE.ShapeGeometry(glassShape,20),mesh=new THREE.Mesh(g,material);
+  mesh.rotation.y=front*Math.PI/2;mesh.position.x=x+front*depth;mesh.scale.set(scale,scale,1);mesh.position.y=1.99*(1-scale);car.add(mesh);
+ };
+ addFace(black,.035,1.06);addFace(glass,.05,1);
+ // Headlights, marker lights, front apron and buffer/coupler recess.
+ for(const side of [-1,1]){
+  const z=side*W*.365;
+  if(modern){
+   box(car,black,x+front*.11,1.56,z,.07,.16,.24);
+   box(car,white,x+front*.155,1.60,z,.08,.065,.21);
+   box(car,red,x+front*.158,1.51,z,.08,.025,.17);
+  }else{
+   cylAt(car,black,x+front*.09,1.49,z,.145,.045,'x');
+   cylAt(car,white,x+front*.13,1.49,z,.105,.055,'x');
+   cylAt(car,red,x+front*.13,1.34,z,.047,.05,'x');
+  }
+  detailRod(car,black,[x+front*.075,1.80,side*.04],[x+front*.075,1.96,side*W*.29],.013);
+  detailBox(car,silver,x+front*.05,1.12,z,.10,.022,.25);
+ }
+ box(car,black,x+front*.10,2.32,0,.05,.16,W*.51);
+ box(car,safety,x+front*.14,2.32,0,.05,.065,W*.34);
+ box(car,dark,x+front*.13,.99,0,.17,.19,W*.87);
+ for(const side of [-1,1]){
+  const z=side*W*.37;
+  box(car,dark,x+front*.17,.95,z,.14,.14,.17);
+  box(car,silver,x+front*.23,.95,z,.04,.04,.13);
+ }
+ // Distinct coupler box, knuckle and air hoses.
+ box(car,black,x+front*.22,.79,0,.25,.19,.31);
+ box(car,silver,x+front*.39,.78,0,.17,.11,.23);
+ for(const side of [-1,1])detailRod(car,rubber,[x+front*.13,.96,side*.18],[x+front*.33,.75,side*.16],.018);
+}
 function eraFront(car,L,W,front,era){
  const x=front*(L/2+.065),s=front;
  if(era==='classic'){
@@ -1777,7 +1851,7 @@ function build(d){
  for(let i=0;i<n;i++){
   const car=new THREE.Group();car.position.x=-total/2+L/2+i*(L+spacing);model.add(car);
   const cab=i===0||i===n-1;
-  if(cab&&(d.era||"modern")==="modern")frontNose(car,body,i===0?-1:1,L,W,d.frontShape||"rounded");
+  // Cab shape is generated by noseSkin and highDetailFront below.
   hollowCarbody(car,L,W,layout,detailEnabled,d.seatLayout||"long");
   roofSurface(car,L,W,d.profile,d.era||'modern');
   // Side skirt, window surrounds, roof shoulder and seams
@@ -1938,7 +2012,7 @@ function build(d){
    box(car,black,ax,2.79,0,.11,.024,.035);
   }
   // Geometry-specific front treatment (not a small trim over the previous generic face).
-  if(cab){eraFront(car,L,W,i===0?-1:1,d.era||'modern');cabHardware(car,L,W,i===0?-1:1,d.era||'modern');
+  if(cab){noseSkin(car,L,W,i===0?-1:1,d.era||'modern');highDetailFront(car,L,W,i===0?-1:1,d.era||'modern');cabHardware(car,L,W,i===0?-1:1,d.era||'modern');
   }else{
    box(car,rubber,-L/2,.98,0,.11,.35,W*.62);
    box(car,rubber,L/2,.98,0,.11,.35,W*.62);
