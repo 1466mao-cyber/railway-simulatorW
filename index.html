@@ -2962,14 +2962,15 @@ animate();
 (()=>{
  const target=document.getElementById('eng3DCanvas');if(!target)return;
  const panel=document.createElement('section');panel.id='rswEnginePanel';
- panel.innerHTML='<strong>🚆 3D描画エンジン — Ver.8.0.1</strong><div><select id="rswEngineChoice" aria-label="車両CG描画エンジン"><option value="three">Three.js（仕様書連動・従来方式）</option><option value="babylon">Babylon.js（新CGスタジオ）</option></select><select id="rswBabylonModel"><option value="modern">現代型車両</option><option value="classic">クラシック型車両</option></select><button id="rswBabylonReload" type="button">CGを再読み込み</button></div><div id="rswEngineStatus">仕様書連動の従来3Dを表示中。新CGスタジオはBabylon.jsで標準搭載GLBを描画します。</div><div id="rswBabylonFrame" hidden><canvas id="rswBabylonCanvas" aria-label="Babylon.js 車両CG"></canvas></div>';
+ panel.innerHTML='<strong>🚆 3D描画エンジン — Ver.8.1.1</strong><div><select id="rswEngineChoice" aria-label="車両CG描画エンジン"><option value="three">Three.js（仕様書連動・従来方式）</option><option value="babylon">Babylon.js（新CGスタジオ）</option></select><select id="rswBabylonModel"><option value="modern">現代型車両</option><option value="classic">クラシック型車両</option></select><button id="rswBabylonReload" type="button">CGを再読み込み</button></div><div id="rswEngineStatus">仕様書連動の従来3Dを表示中。新CGスタジオはBabylon.jsで標準搭載GLBを描画します。</div><div id="rswBabylonFrame" hidden><canvas id="rswBabylonCanvas" aria-label="Babylon.js 車両CG"></canvas></div>';
  target.parentNode.insertBefore(panel,target);
  const choice=panel.querySelector('#rswEngineChoice'),kind=panel.querySelector('#rswBabylonModel'),reload=panel.querySelector('#rswBabylonReload'),frame=panel.querySelector('#rswBabylonFrame'),canvas=panel.querySelector('#rswBabylonCanvas'),status=panel.querySelector('#rswEngineStatus');
  let engine=null,scene=null,modelRoot=null,loading=false,active=false;
  const loadScript=(url)=>new Promise((ok,bad)=>{const s=document.createElement('script');s.src=url;s.onload=ok;s.onerror=()=>bad(new Error('CDNの読み込みに失敗'));document.head.appendChild(s)});
  async function ensureEngine(){
   if(!window.BABYLON)await loadScript('https://cdn.jsdelivr.net/npm/babylonjs@7.54.3/babylon.js');
-  if(!BABYLON.SceneLoader?.GetPluginForExtension?.('.glb'))await loadScript('https://cdn.jsdelivr.net/npm/babylonjs-loaders@7.54.3/babylonjs.loaders.min.js');
+  if(!BABYLON.SceneLoader?.IsPluginForExtensionAvailable?.('.glb'))await loadScript('https://cdn.jsdelivr.net/npm/babylonjs-loaders@7.54.3/babylonjs.loaders.min.js');
+  if(!BABYLON.SceneLoader?.IsPluginForExtensionAvailable?.('.glb'))throw new Error('Babylon.jsのGLBローダーが登録されていません');
   if(engine)return;
   engine=new BABYLON.Engine(canvas,true,{preserveDrawingBuffer:false,stencil:true,adaptToDeviceRatio:false});
   engine.setHardwareScalingLevel(Math.max(1,(window.devicePixelRatio||1)/1.5));
@@ -2988,16 +2989,21 @@ animate();
   window.addEventListener('resize',()=>engine?.resize());
  }
  async function loadModel(){
-  if(loading||!active)return;loading=true;reload.disabled=true;status.textContent='Babylon.jsで車両GLBを読み込み中…';
+  if(loading||!active)return;loading=true;reload.disabled=true;status.textContent='Babylon.jsで車両GLBを読み込み中…（バイナリ直接読み込み）';
   try{
    await ensureEngine();
    const encoded=JSON.parse(document.getElementById('rsw-builtin-glb').textContent)[kind.value];
    if(!encoded)throw new Error('標準GLBが見つかりません');
    const bin=atob(encoded),bytes=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)bytes[i]=bin.charCodeAt(i);
-   // Pass a named binary File directly: blob: URLs may be parsed as JSON by Babylon's loader.
-   const glbFile=new File([bytes], 'rsw-'+kind.value+'.glb', {type:'model/gltf-binary'});
+   // Babylon SceneLoader accepts an ArrayBufferView as sceneFilename.  Passing a File
+   // with a `file:` root caused Safari/Babylon to route the GLB to the JSON parser.
+   // Validate the GLB header and force the binary glTF loader extension.
+   const view=new DataView(bytes.buffer,bytes.byteOffset,bytes.byteLength);
+   if(bytes.length<20||view.getUint32(0,true)!==0x46546c67||view.getUint32(4,true)!==2||view.getUint32(8,true)!==bytes.length){
+    throw new Error('内蔵GLBデータのヘッダーが不正です');
+   }
    if(modelRoot){modelRoot.dispose(false,false);modelRoot=null}
-   const result=await BABYLON.SceneLoader.ImportMeshAsync('', 'file:', glbFile, scene, undefined, '.glb');
+   const result=await BABYLON.SceneLoader.ImportMeshAsync('', '', bytes, scene, undefined, '.glb');
    modelRoot=new BABYLON.TransformNode('vehicleRoot',scene);
    for(const node of result.meshes){if(!node.parent)node.parent=modelRoot}
    modelRoot.rotation.x=-Math.PI/2;
