@@ -2932,7 +2932,7 @@ animate();
 (()=>{
  const target=document.getElementById('eng3DCanvas');if(!target)return;
  const panel=document.createElement('section');panel.id='rswEnginePanel';
- panel.innerHTML='<strong>🚆 3D描画エンジン — Ver.8.0</strong><div><select id="rswEngineChoice" aria-label="車両CG描画エンジン"><option value="three">Three.js（仕様書連動・従来方式）</option><option value="babylon">Babylon.js（新CGスタジオ）</option></select><select id="rswBabylonModel"><option value="modern">現代型車両</option><option value="classic">クラシック型車両</option></select><button id="rswBabylonReload" type="button">CGを再読み込み</button></div><div id="rswEngineStatus">仕様書連動の従来3Dを表示中。新CGスタジオはBabylon.jsで標準搭載GLBを描画します。</div><div id="rswBabylonFrame" hidden><canvas id="rswBabylonCanvas" aria-label="Babylon.js 車両CG"></canvas></div>';
+ panel.innerHTML='<strong>🚆 3D描画エンジン — Ver.8.0.1</strong><div><select id="rswEngineChoice" aria-label="車両CG描画エンジン"><option value="three">Three.js（仕様書連動・従来方式）</option><option value="babylon">Babylon.js（新CGスタジオ）</option></select><select id="rswBabylonModel"><option value="modern">現代型車両</option><option value="classic">クラシック型車両</option></select><button id="rswBabylonReload" type="button">CGを再読み込み</button></div><div id="rswEngineStatus">仕様書連動の従来3Dを表示中。新CGスタジオはBabylon.jsで標準搭載GLBを描画します。</div><div id="rswBabylonFrame" hidden><canvas id="rswBabylonCanvas" aria-label="Babylon.js 車両CG"></canvas></div>';
  target.parentNode.insertBefore(panel,target);
  const choice=panel.querySelector('#rswEngineChoice'),kind=panel.querySelector('#rswBabylonModel'),reload=panel.querySelector('#rswBabylonReload'),frame=panel.querySelector('#rswBabylonFrame'),canvas=panel.querySelector('#rswBabylonCanvas'),status=panel.querySelector('#rswEngineStatus');
  let engine=null,scene=null,modelRoot=null,loading=false,active=false;
@@ -2959,15 +2959,15 @@ animate();
  }
  async function loadModel(){
   if(loading||!active)return;loading=true;reload.disabled=true;status.textContent='Babylon.jsで車両GLBを読み込み中…';
-  let url;
   try{
    await ensureEngine();
    const encoded=JSON.parse(document.getElementById('rsw-builtin-glb').textContent)[kind.value];
    if(!encoded)throw new Error('標準GLBが見つかりません');
    const bin=atob(encoded),bytes=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)bytes[i]=bin.charCodeAt(i);
-   url=URL.createObjectURL(new Blob([bytes],{type:'model/gltf-binary'}));
+   // Pass a named binary File directly: blob: URLs may be parsed as JSON by Babylon's loader.
+   const glbFile=new File([bytes], 'rsw-'+kind.value+'.glb', {type:'model/gltf-binary'});
    if(modelRoot){modelRoot.dispose(false,false);modelRoot=null}
-   const result=await BABYLON.SceneLoader.ImportMeshAsync('','',url,scene,undefined,'.glb');
+   const result=await BABYLON.SceneLoader.ImportMeshAsync('', 'file:', glbFile, scene, undefined, '.glb');
    modelRoot=new BABYLON.TransformNode('vehicleRoot',scene);
    for(const node of result.meshes){if(!node.parent)node.parent=modelRoot}
    modelRoot.rotation.x=-Math.PI/2;
@@ -2980,7 +2980,7 @@ animate();
    status.textContent='Babylon.jsで描画中：'+(kind.value==='modern'?'現代型':'クラシック型')+'GLB｜ドラッグで回転・ピンチで拡大。\n※仕様書に連動する自動生成車両は従来Three.js表示を使用します。';
    engine.resize();
   }catch(e){status.textContent='Babylon.js読み込みエラー：'+(e.message||e)+'\n従来エンジンへ切り替えて続行できます。';console.error(e)}
-  finally{if(url)URL.revokeObjectURL(url);loading=false;reload.disabled=false}
+  finally{loading=false;reload.disabled=false}
  }
  function toggle(){active=choice.value==='babylon';target.hidden=active;frame.hidden=!active;kind.disabled=!active;reload.disabled=!active;if(active){loadModel()}else{status.textContent='Three.jsの仕様書連動3D表示に戻しました。'}}
  choice.addEventListener('change',toggle);kind.addEventListener('change',loadModel);reload.addEventListener('click',loadModel);
